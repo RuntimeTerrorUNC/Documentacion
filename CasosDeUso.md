@@ -59,11 +59,9 @@ Caso de Exito (Flujo Principal):
 3. El Usuario comienza a jugar.
 
 
-Casos Alternativos: 
-
 Casos Excepcionales:
 
-2\. Los datos ingresados no cumplen los requisitos &rArr; El sistema solicita reingresar los datos inválidos.
+2. Los datos ingresados no cumplen los requisitos &rArr; El sistema solicita reingresar los datos inválidos.
 
 
 --- 
@@ -83,7 +81,8 @@ Caso de Exito (Flujo Principal):
 Casos Alternativos: 
 
 Casos Excepcionales:
-2\. Los datos ingresados no cumplen los requisitos &rArr; El sistema solicita reingresar los datos inválidos.
+
+2. Los datos ingresados no cumplen los requisitos (casilla vacias, nombre ya registrado, email ya registrado, password incorrecto) &rArr; El sistema informa al usuario los datos que no cumplen y le solicita que ingrese nuevamente.
 
 ---
 ## Caso de Uso 3:
@@ -101,8 +100,8 @@ Caso de Exito (Flujo Principal):
 4. El sistema redirige al usuario a la página de autenticación
 
 Casos Alternativos: 
-2\.(a) El usuario cancela la acción &rArr; El Sistema quita la ventana de cierre de sesión.
-Casos Excepcionales:
+3. El usuario cancela la acción cancelar
+4. El Sistema quita la ventana de cierre de sesión y el usuario sigue jugando
 
 ---
 ## Caso de Uso 4:
@@ -111,18 +110,16 @@ Título:  Crear Club
 
 Actor: Usuario
 
-Precondición: El Usuario está autenticado; No tiene club
+Precondición: El Usuario está autenticado y No tener club
 
 Caso de Exito (Flujo Principal):
-1. Usuario ingresa el nombre de su nuevo club.
+1. Usuario ingresa un nombre y un avatar
 2. El sistema valida los datos ingresados y notifica que el club fue creado.
 3. El Usuario ingresa al Home
 
-Casos Alternativos: 
-
 Casos Excepcionales:
-
-2\.(a) Los campos nombre/avatar no fueron cargados de forma válida  &rArr; El sistema solicita reingresar el/los datos.	
+- 2.a) El nombre ingresado no cumple con las restricciones del campo (casilla vacías, caracteres invalido, nombre ya registrado) &rArr; Se informa al usuario que ingrese nuevamente un nombre.
+- 2.b) El avatar ingresado no cumple con las restricciones (casilla vacías, formato invalido) &rArr;Se informa al usuario que el dato no cumple con tal restricción y se le pide que ingrese nuevamente.
 
 ## Menú del Club
 ---
@@ -182,19 +179,14 @@ Precondición: Usuario Autenticado; Tener Club;
 
 Caso de Exito (Flujo Principal):
 1. El Usuario solicita la creación de un nuevo jugador.
-2. El Sistema solicita el nombre del jugador y la asignación numérica para sus 4 skills (Fuerza, Velocidad, Control, Físico).
-3. El Usuario ingresa el nombre y distribuye los puntos entre los atributos.
-4. El Sistema valida que el nombre no exista en el plantel y que la suma de las skills sea exactamente igual a 300 puntos.
-5. El Sistema registra al nuevo jugador en el plantel del club y confirma la creación exitosa.
-
-(Alternativa) 4\. El Sistema valida la entrada, registra el nuevo jugador y confirma la creación
-
-Casos Alternativos: 
+2. El Sistema solicita el nombre del jugador y la asignación numérica para sus 4 skills (Poder, Agilidad, Control, Velocidad y Fuerza).
+3. El Usuario ingresa el nombre y distribuye 300 puntos entre los atributos.
+4. El Sistema confirma los datos ingresados, crea y registra al jugador en el club y confirma la creación al usuario
 
 Casos Excepcionales:
-- Suma de skills distinta de 300 pts  &rArr; El sistema rechaza el registro, notifica la diferencia de puntos y solicita reajustar los valores. (¿distinta o solo mayor?)
-- Nombre duplicado &rArr; El sistema rechaza el registro, notifica que el nombre ya existe en el club y solicita uno nuevo.
-- Límite de jugadores alcanzado  &rArr; El sistema bloquea la acción, notifica que se alcanzó la capacidad máxima de la base de datos e invita a eliminar un jugador. (¿cual es?)
+- 4.a) La suma de las skills es superior a 300 pts &rArr; El sistema le notifica la diferencia de puntos y solicita reajustar los valores.
+- 4.b) Nombre duplicado &rArr; El sistema le informa que el nombre ya existe en el club y solicita uno nuevo.
+- 4.c) Límite de jugadores alcanzado &rArr; El sistema le informa que alcanzó el límite de jugadores y le sugiere que elimine un jugador para crear al nuevo jugador
 
 ---
 ## Caso de Uso 8:
