@@ -48,46 +48,52 @@
 
 ## Caso de Uso 1:
 
-Título:  Autenticar Usuario
+### Autenticar Usuario
 
 **DFD:** [Ver diagrama de Autenticar Usuario](DFDs/DFD_01_AUTENTICAR_USUARIO.png)
 
-Actor: Usuario
+**Actor:** Usuario  
+**Precondición:** El usuario no está autenticado
 
-Precondición: El Usuario no está Logueado
+**Caso de éxito:**
 
-Caso de Exito (Flujo Principal):
 1. El usuario ingresa credenciales user y password.
 2. El sistema chequea las credenciales.
-3. El Usuario comienza a jugar.
+3. El sistema permite el acceso.
+4. El sistema muestra la pantalla de inicio de su club.
 
+**Caso excepcional:**
 
-Casos Excepcionales:
+- El user no existe → el sistema informa `user or password is incorrect`.
+- La contraseña es incorrecta → el sistema informa `user or password is incorrect`.
+- Entrada no válida → el sistema informa de caracteres incorrectos.
 
-2. Los datos ingresados no cumplen los requisitos &rArr; El sistema solicita reingresar los datos inválidos.
 
 
 --- 
 
 ## Caso de Uso 2:
 
-Título:  Registrar Usuario
+### Registrar Usuario
 
 **DFD:** [Ver diagrama de Registrar Usuario](DFDs/DFD_02_REGISTRAR_USUARIO.png)
 
-Actor: Usuario
+**Precondición:** El usuario no está autenticado ni registrado.
 
-Precondición: El Usuario no está Autenticado ni Registrado
+**Caso de éxito:**
 
-Caso de Exito (Flujo Principal):
-1. El Usuario ingresa un nombre, email y password.
-2. El sistema valida los datos ingresados.
-3. El sistema muestra pantalla de inicio.
-Casos Alternativos: 
+1. El sistema pide user y contraseña.
+2. El usuario ingresa un user y una contraseña para registrar su cuenta.
+3. El sistema valida la entrada.
+4. El sistema verifica que no existan usuarios registrados con el mismo user.
+5. El sistema crea su cuenta.
+6. El sistema muestra la pantalla de inicio.
 
-Casos Excepcionales:
+**Caso excepcional:**
 
-2. Los datos ingresados no cumplen los requisitos (casilla vacias, nombre ya registrado, email ya registrado, password incorrecto) &rArr; El sistema informa al usuario los datos que no cumplen y le solicita que ingrese nuevamente.
+- El usuario intenta registrar un user ya registrado → el sistema le pide que cambie el user.
+- El usuario ingresa caracteres no válidos → el sistema informa caracteres incorrectos.
+
 
 ---
 ## Caso de Uso 3:

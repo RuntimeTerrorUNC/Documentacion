@@ -28,9 +28,8 @@ Este índice relaciona cada DFD con el número y el título del caso de uso defi
 | 34 | Cambiar plantel titular de una liga | [DFD_34_CAMBIAR_PLANTEL_TITULAR_DE_UNA_LIGA.png](DFD_34_CAMBIAR_PLANTEL_TITULAR_DE_UNA_LIGA.png) |
 | — | Sin correspondencia en `CasosDeUso.md`: Eliminar club | [DFD_SIN_CASO_ELIMINAR_CLUB.png](DFD_SIN_CASO_ELIMINAR_CLUB.png) |
 
-## Casos sin DFD
+##  DFD FALTANTES
 
-Según el índice actual de `CasosDeUso.md`, no se encontró un DFD con nombre correspondiente para los siguientes casos:
 
 - 15. Unirse a liga
 - 19. Invitar a partido amistoso
