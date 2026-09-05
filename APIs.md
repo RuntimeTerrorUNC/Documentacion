@@ -675,91 +675,6 @@ Respuestas:
     "partidos_perdidos": "Integer",
     "partidos_empatados": "Integer",
     "goles_a_favor": "Integer",
-    "goles_en_contra": "Integer",
-    "goles_diferencia": "Integer",
-    "puntos": "Integer"
-  }
-]
-```
-
-- 403 Forbidden
-```json
-{ "error": "String (Bloquea la consulta informando que el usuario no participa en esta liga, respetando la precondición del lobby)" }
-```
-
-- 404 Not Found
-```json
-{ "error": "String (Informa que no se encontró ninguna liga asociada a ese identificador)" }
-```
-
-## GET /api/ligas/activas
-Headers:
-- Authorization: Bearer <token_jwt>
-
-Body:
-- Vacío.
-
-Respuestas:
-- 200 OK
-```json
-[
-  {
-    "id_liga": "Integer",
-    "nombre": "String (Nombre de la liga)",
-    "clubes_maximos": "Integer (La máxima cantidad de clubes que se pueden unir)",
-    "clubes_esperando": "Integer (Cantidad de clubes inscriptos actualmente a la espera de que se complete el cupo máximo para iniciar)"
-  }
-]
-```
-
-- 403 Forbidden
-```json
-{ "error": "String (Bloquea la consulta informando que el usuario no cumple con la precondición de poseer un club registrado para poder explorar el listado)" }
-```
-
-- 404 Not Found
-```json
-{ "error": "String (Informa que actualmente no existen ligas en la plataforma que estén en fase de espera y disponibles para unirse)" }
-```
-
-## GET /api/ligas/{id_liga}/fixture
-Headers:
-- Authorization: Bearer <token_jwt>
-
-Body:
-- Vacío. El identificador de la liga se envía como parámetro en la URL.
-
-Respuestas:
-- 200 OK
-```json
-[
-  {
-    "id_partido": "Integer",
-    "fecha": "Integer (Número de la jornada o fecha correspondiente a este cruce)",
-    "equipo_local": "String (Nombre del club)",
-    "equipo_visitante": "String (Nombre del club)",
-    "estado": "String ('pendiente', 'en vivo' o 'finalizado')",
-    "goles_local": "Integer (Nulo si el partido está 'pendiente', numérico si está 'en vivo' o 'finalizado')",
-    "goles_visitante": "Integer (Nulo si el partido está 'pendiente', numérico si está 'en vivo' o 'finalizado')"
-  }
-]
-```
-
-- 403 Forbidden
-```json
-{ "error": "String (Bloquea la consulta informando que el usuario no cumple con la precondición de poseer un club o no participa en esta liga específica)" }
-```
-
-- 404 Not Found
-```json
-{ "error": "String (Informa que no se encontró ninguna liga asociada a ese identificador en el sistema)" }
-```
-
-## POST /api/ligas/{id_liga}/salir
-Headers:
-- Authorization: Bearer <token_jwt>
-
-Body:
 - Vacío. La advertencia visual informando que perderá su lugar y la posterior decisión de confirmar o rechazar ocurren estrictamente en la interfaz del Frontend; la petición a la API se dispara únicamente cuando el usuario elige la opción "confirmar".
 
 Respuestas:
@@ -1042,88 +957,6 @@ En un WebSocket de partido en vivo no conviene mandar un solo tipo de mensaje gi
 Esto evita mandar información redundante todo el tiempo (por ejemplo, no tiene sentido reenviar los límites de la cancha 10 veces por segundo si nunca cambian) y separa claramente "esto es un dato que se actualiza" de "esto es un hecho que ocurrió".
 
 **Endpoint:** `websocket/partidos/{id_partido}`  
-**Autenticación:** token JWT
-
-El servidor envía tres tipos de mensajes distintos, diferenciados por el campo `tipo`.
-
-### 1. Mensaje inicial
-
-> Se envía una sola vez, al conectarse.
-
-Contiene todo lo que no cambia durante el partido: límites de la cancha, datos de los clubes, plantel convocado, duración total y en qué segundo ocurre cada pausa.
-
-```json
-{
-  "tipo": "init",
-  "id_partido": Integer,
-  "cancha": { "ancho": Integer, "alto": Integer },
-  "club_local": { "id_club": Integer, "nombre": String, "avatar": String (URL) },
-  "club_visitante": { "id_club": Integer, "nombre": String, "avatar": String (URL) },
-  "duracion_partido_seg": Integer,
-  "pausas_programadas": [
-    { "tipo": "hidratacion_1" | "medio_tiempo" | "hidratacion_2", "segundo": Integer }
-  ],
-  "plantel_local": [
-    { "id_jugador": Integer, "nombre": String, "rol": "titular" | "suplente" }
-  ],
-  "plantel_visitante": [
-    { "id_jugador": Integer, "nombre": String, "rol": "titular" | "suplente" }
-  ]
-}
-```
-
-### 2. Estado en vivo
-
-Se envía repetidamente mientras el partido está en curso, por ejemplo, cada 150 ms. Contiene la "foto" del momento actual: posición de la pelota, posición y acción de cada jugador, marcador y reloj.
-
-```json
-{
-  "tipo": "estado",
-  "tiempo_transcurrido_seg": Integer,
-  "estado_partido": "prematch" | "en_curso" | "pausa" | "finalizado",
-  "pelota": { "x": Float, "y": Float, "posesion_id_jugador": Integer o null },
-  "jugadores": [
-    {
-      "id_jugador": Integer,
-      "id_club": Integer,
-      "x": Float,
-      "y": Float,
-      "comportamiento": String
-    }
-  ],
-  "goles_local": Integer,
-  "goles_visitante": Integer
-}
-```
-
-### 3. Eventos puntuales
-
-Se envían solo cuando ocurre el hecho y no se repiten.
-
-**Gol:**
-
-```json
-{ "tipo": "evento_gol", "id_club_anota": Integer, "id_jugador_anota": Integer, "goles_local": Integer, "goles_visitante": Integer, "tiempo_seg": Integer }
-```
-
-**Inicio de pausa:**
-
-```json
-{ "tipo": "evento_pausa_inicio", "pausa": String, "tiempo_seg": Integer }
-```
-
-**Fin de pausa / reanudación:**
-
-```json
-{ "tipo": "evento_pausa_fin", "tiempo_seg": Integer }
-```
-
-**Sustitución efectuada:**
-
-```json
-{ "tipo": "evento_sustitucion", "id_club": Integer, "id_jugador_sale": Integer, "id_jugador_entra": Integer }
-```
-
 **Fin de partido:**
 
 ```json
@@ -1133,3 +966,126 @@ Se envían solo cuando ocurre el hecho y no se repiten.
 **Cierre de conexión:** el servidor cierra el socket automáticamente al enviar `evento_fin_partido`. El cliente puede desconectarse en cualquier momento sin afectar la simulación, ya que este canal es solo de lectura (no se manda nada desde el cliente).
 
 
+## API COMPORTAMIENTO
+
+### Contrato — Librería de Comportamientos (Primitivas y Compuestos)
+
+define las funciones disponibles dentro del sandbox donde se ejecuta el script Python de cada jugador. No son endpoints HTTP: son funciones que se llaman directamente desde el código del comportamiento, evaluadas en cada tick del motor de simulación.
+
+Se dividen en tres niveles:
+
+- **Atómicas:** las únicas dos acciones reales que puede ejecutar un jugador en un tick.
+- **Info:** funciones de solo lectura para consultar el estado del partido.
+- **Compuestas:** funciones de ayuda de más alto nivel, construidas combinando atómicas + sensores, para facilitarle el trabajo al usuario.
+
+**Regla general:** por tick, un jugador solo puede ejecutar una acción (atómica o compuesta — las compuestas terminan llamando internamente a una atómica). Si el script llama a más de una acción en el mismo tick, aplica la regla de validación que se defina (ej. se ejecuta la primera y se ignoran las siguientes).
+
+## 1. Primitivas Atómicas
+
+### `correr(x, y, z)`
+
+**Parámetros:**
+
+- `x, y (Float)`: coordenadas del punto de la cancha hacia el que se quiere correr.
+- `z (Integer, 0–100)`: porcentaje de la velocidad máxima del jugador (según su skill de Velocidad) que se usará en este tick.
+
+**Comportamiento:** mueve al jugador un paso en dirección a (x, y), a la fracción de velocidad indicada por z.
+
+**Nota:** z = 0 equivale a quedarse quieto; no hace falta una primitiva separada para eso.
+
+### `patearConFuerza(x, y, z)`
+
+**Parámetros:**
+
+- `x, y (Float)`: coordenadas del punto de la cancha hacia donde se dirige la pelota.
+- `z (Integer, 0–100)`: fuerza del pateo (a mayor fuerza, mayor velocidad y distancia recorrida por la pelota).
+
+**Comportamiento:** patea la pelota hacia (x, y) con la fuerza z, siempre que el jugador esté dentro del rango de contacto con la pelota (ver sensor `puedo_patear()`).
+
+**Falla silenciosa o error:** si se llama sin estar en rango de la pelot el jugador no hace nada [correr(jugador.x, jugador.y, 0)]
+
+## 2. Información de la cancha
+
+Todos son de solo lectura, no consumen la acción del tick — se pueden llamar todas las veces que se necesite antes de decidir qué acción ejecutar. NO es como una api no se le devuelve al usuario, estas funciones se las puede llamar en el script
+
+| Función | Devuelve | Descripción |
+|---|---|---|
+| `puedo_patear()` | `bool` | Si el jugador está lo suficientemente cerca de la pelota como para patearla. |
+| `mi_posicion()` | `(x, y)` | Coordenadas actuales del propio jugador. |
+| `posicion_pelota()` | `(x, y)` | Coordenadas actuales de la pelota. |
+| `rival_mas_cercano()` | `jugador {id, x, y}` | Datos del rival más próximo al jugador. |
+| `companero_mas_cercano()` | `jugador {id, x, y}` | Ídem, del propio equipo. |
+| `jugadores_propios()` | `lista[jugador]` | Lista de los jugadores propios en cancha con su posición. |
+| `jugadores_rivales()` | `lista[jugador]` | Lista de los jugadores rivales en cancha con su posición. |
+| `posicion_arco_propio()` | `(x, y)` | Coordenadas del centro del propio arco. |
+| `posicion_arco_rival()` | `(x, y)` | Coordenadas del centro del arco rival. |
+| `tiempo_restante()` | `Integer` | Segundos restantes para que termine el partido. |
+| `marcador()` | `(goles_propios, goles_rivales)` | Marcador actual del partido. |
+| `id_propio()` | `int` | identificación del jugador quien llama la función |
+| `distancia_a(x,y)` | `output: Float` | Distancia entre el jugador y un punto (x, y) |
+
+## 3. Comportamientos Compuestos (helpers de la librería)
+
+Cada uno se ofrece ya implementado para que el usuario no tenga que escribirlo desde cero, pero se construye únicamente con las atómicas y sensores de arriba.
+
+### `marcar(id_jugador_rival, referencia)`
+
+- **Parámetros:** id_jugador_rival (Integer) — el jugador rival a marcar.
+- **Referencia:** (enum)[pelota|arco]
+- **Comportamiento:** calcula el punto medio entre el rival y la referencia elegida (pelota o arco propio), y corre hacia ahí.
+- **Se basa en:** jugadores_rivales() (o el id recibido) + posicion_arco_propio() + correr().
+
+### `perseguir_jugador(id)`
+
+- **Parámetros:** id (Integer) — jugador propio o rival a perseguir.
+- **Comportamiento:** ejecuta correr() hacia la posición actual de ese jugador, recalculando en cada tick porque el objetivo se mueve.
+- **Se basa en:** jugadores_propios()/jugadores_rivales() + correr().
+
+### `perseguir_pelota()`
+
+- **Comportamiento:** ejecuta correr() hacia posicion_pelota() en cada tick.
+- **Se basa en:** posicion_pelota() + correr().
+
+### `rematar_al_arco()`
+
+- **Comportamiento:** si puedo_patear() es verdadero, ejecuta patearConFuerza() hacia posicion_arco_rival() con fuerza máxima (z = 100).
+- **Se basa en:** puedo_patear() + posicion_arco_rival() + patearConFuerza().
+
+### `pasar_a(id_companero)`
+
+- **Parámetros:** id_companero (Integer) — el compañero al que se le pasa la pelota.
+- **Comportamiento:** ejecuta patearConFuerza() hacia la posición actual de ese compañero, con una fuerza z fija
+- **Se basa en:** jugadores_propios() + distancia_a() + patearConFuerza().
+- con una fuerza z de 15
+
+### `despejar()`
+
+- **Comportamiento:** ejecuta patearConFuerza() con fuerza máxima en dirección contraria al propio arco, sin apuntar a un jugador específico — pensado como acción defensiva de urgencia.
+- **Se basa en:** posicion_arco_propio() + patearConFuerza().
+
+### `cubrir_posicion(x, y)`
+
+- **Parámetros:** x, y (Float) — coordenada táctica fija.
+- **Comportamiento:** ejecuta correr() hacia (x, y) y se mantiene ahí (disciplina posicional), sin perseguir la pelota.
+- **Se basa en:** correr().
+
+### `evadir(id_rival)`
+
+- **Parámetros:** id_rival (Integer) — el rival del que se quiere alejar.
+- **Comportamiento:** ejecuta correr() en dirección contraria a la posición de ese rival, típicamente mientras el jugador tiene la pelota (regate simple).
+- **Se basa en:** jugadores_rivales() + mi_posicion() + correr().
+
+### `transportar_balon(x, y)`
+
+- **Parámetros:** x, y (Float) — destino hacia donde se quiere llevar la pelota.
+- **Comportamiento:** si puedo_patear(), ejecuta patearConFuerza(x, y, z_bajo) (toque suave hacia adelante); en !puedo_patear() caso, ejecuta correr(x, y, 100) para perseguir la pelota a fondo.
+- **Se basa en:** puedo_patear() + patearConFuerza() + correr().
+- definir el valor de z_bajo (fuerza del toque suave)  por defecto 15
+
+## Reglas de ejecución
+
+**Resolución de disputa:** si más de un jugador (propio o rival) tiene puedo_patear() == true y ambos ejecutan patearConFuerza() en el mismo tick, se resuelve por mayor skill de Poder; en caso de empate, se decide aleatoriamente (50/50). El/los jugadores que pierden la disputa no ejecutan el pateo ese tick (equivalente a correr(jugador.x, jugador.y, 0)).
+
+**Timeout:** 100ms (1/10 seg) por tick. Si el script de un jugador tarda más que eso en devolver una acción, ese tick el jugador no hace nada (equivalente a correr(jugador.x, jugador.y, 0)).
+
+**Modelo de ejecución — sin estado (stateless):** el script no conserva memoria entre ticks. Cada tick se evalúa como una ejecución nueva e independiente: no existen variables que persistan de un tick al siguiente ni se recuerda ninguna decisión tomada previamente.
