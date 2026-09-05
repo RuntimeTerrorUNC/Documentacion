@@ -139,11 +139,10 @@ Caso de Exito (Flujo Principal):
 5. El sistema actualiza el nombre del club en la base de datos.
 6. El sistema notifica que el cambio se realizó correctamente.
 
-Casos Alternativos: 
-
 Casos Excepcionales:
-- Nombre duplicado &rArr; El sistema rechaza el cambio, informa que el nombre ya está en uso por otro club bajo la regla de unicidad global y solicita uno nuevo.
-- Caracteres inválidos / Longitud excedida &rArr; El sistema rechaza el cambio, especifica la regla de formato infringida y solicita corregir el texto.
+
+- 4.a) Nombre duplicado &rArr; El sistema rechaza el cambio, informa que el nombre ya está en uso por otro club bajo la regla de unicidad global y solicita uno nuevo.
+- 4.b) Caracteres inválidos / Longitud excedida &rArr; El sistema rechaza el cambio, especifica la regla de formato infringida y solicita corregir el texto.
 
 ---
 ## Caso de Uso 6:
@@ -158,15 +157,11 @@ Caso de Exito (Flujo Principal):
 1. El usuario solicita actualizar el avatar de su club.
 2. El sistema solicita la carga de un archivo de imagen.
 3. El usuario selecciona y sube un archivo.
-4. El sistema valida que la extensión sea .png o .jpg y que el tamaño no exceda el peso máximo permitido en el servidor.
-5. El sistema procesa la imagen, reemplaza el avatar anterior y asocia el nuevo archivo al club.
-6. El sistema confirma la actualización exitosa visualizando el nuevo avatar.
-(triple interacción del sistema :c)
-Casos Alternativos: 
+4. El sistema valida el archivo subido, procesa y reemplaza el avatar anterior y le informa que la actualización fue exitosa.
 
 Casos Excepcionales:
-- Extensión de archivo no válida &rArr; El sistema rechaza la carga, advierte que solo se admiten formatos .png o .jpg y cancela la acción.
-- Archivo excede peso máximo &rArr; El sistema bloquea la carga, informa el límite en megabytes (MB) y solicita subir un archivo más liviano.
+- 4.a) La extensión del archivo no es válida &rArr; El sistema rechaza la carga, le informa que solo admite formato .png o .jpg y le solicita que suba nuevamente el archivo
+- 4.b) El archivo excede el peso máximo &rArr; El sistema bloquea la carga, le informa el límite en megabytes(MB) y solicita subir un archivo más liviano
 
 ---
 ## Caso de Uso 7:
@@ -189,30 +184,9 @@ Casos Excepcionales:
 - 4.c) Límite de jugadores alcanzado &rArr; El sistema le informa que alcanzó el límite de jugadores y le sugiere que elimine un jugador para crear al nuevo jugador
 
 ---
-## Caso de Uso 8:
-
-Título:  Eliminar Jugador
-
-Actor: Usuario
-
-Precondición: Usuario Autenticado; Tener Club; Al menos un jugador creado
-
-Caso de Exito (Flujo Principal):
-1. El usuario solicita eliminar un jugador de su equipo.
-2. El sistema solicita el nombre del jugador
-3. El usuario pone/selecciona el nombre del jugador que desea eliminar
-4. El sistema verifica que el jugador no esté activo/convocado y es eliminado. 
-
-Casos Alternativos: 
-
-Casos Excepcionales:
-- Jugador disputando partido activo o esta convocado &rArr; El sistema bloquea el borrado, notifica que el jugador está en un partido en vivo y cancela la acción.
-- Plantel queda por debajo del mínimo legal (<6 jugadores en liga activa) &rArr; El sistema bloquea el borrado, notifica que el jugador está en convocado y cancela la acción.
-- No existe ningún jugador con ese nombre &rArr; El sistema advierte de que no se eliminó a ningún jugador ya que no existe 
-(¿va?)
 
 ---
-## Caso de Uso 9:
+## Caso de Uso 8:
 
 Título:  Crear Comportamiento
 
@@ -222,19 +196,16 @@ Precondición: Usuario Autenticado; Tener Club
 
 Caso de Exito (Flujo Principal):
 1. El Usuario solicita crear un nuevo comportamiento.
-2. El Ssistema despliega el formulario requiriendo nombre y el código Python del comportamiento.
-3. El Usuario ingresa el nombre,y escribe el comportamiento de Python.
-4. El Sistema valida que el nombre sea único en el club y que el código respete la sintaxis 
-5. El Sistema almacena el comportamiento asociado al club y confirma su creación.
-(Alternativa) 4\. El Sistema valida la entrada, almacena el nuevo comportamiento y confirma la creación.
-Casos Alternativos: 
+2. El Sistema despliega el formulario requiriendo nombre y el código Python del comportamiento.
+3. El Usuario ingresa el nombre y escribe el comportamiento de Python.
+4. El Sistema valida la entrada, almacena el nuevo comportamiento y confirma la creación.
 
 Casos Excepcionales:
-- Nombre duplicado &rArr; El sistema rechaza el registro, informa el conflicto de nombre y solicita ingresar uno diferente.
-- Código no válido / Primitivas prohibidas &rArr; El sistema rechaza el código, informa el error de sintaxis y solicita corregirlo.
+- 4.a) Nombre duplicado &rArr; El sistema rechaza el registro, informa el conflicto de nombre y solicita ingresar uno diferente.
+- 4.b) Código no válido / Primitivas prohibidas &rArr; El sistema rechaza el código, informa el error de sintaxis y solicita corregirlo.
 
 ---
-## Caso de Uso 10:
+## Caso de Uso 9:
 
 Título:  Listar Comportamientos
 
@@ -251,7 +222,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 11:
+## Caso de Uso 10:
 
 Título:  Ver Comportamiento
 
@@ -263,16 +234,13 @@ Caso de Exito (Flujo Principal):
 1. El usuario solicita ver un comportamiento
 2. El sistema solicita el nombre del comportamiento especifico 
 3. El usuario ingresa el nombre del comportamiento
-4. El sitema muestra el codigo python del comportamiento
-
-Casos Alternativos: 
+4. El sistema valida el nombre y le muestra el codigo python del comportamiento
 
 Casos Excepcionales:
 
-- El nombre del comportamiento no existe &rArr; El sistema informa de que no se encontró ninguno 
-
+4. El nombre del comportamiento no existe &rArr; El sistema le informa que el comportamiento no existe y que vuelva a ingresar un nombre especifico
 ---
-## Caso de Uso 12:
+## Caso de Uso 11:
 
 Título:  Modificar Comportamiento
 
@@ -282,8 +250,8 @@ Precondición: Usuario autenticado ; Tener Club ; Al menos dos comportamientos (
 
 Caso de Exito (Flujo Principal):
 1. El usuario solicita modificar un comportamiento.
-2. El sistema pide el NOMBRE del comportamiento
-3. El usuario ingresa el nombre del comportamiento a modificar
+2. El sistema le pide ingrese el nombre del comportamiento
+3. El usuario ingresa el nombre del comportamiento
 4. El sistema verifica que el comportamiento exista y que el numero de comportamientos sea >1. Espera confirmacion del usuario
 5. El usuario modifica el código y confirma la modificación.
 6. El sistema modifica permanentemente el comportamiento.
