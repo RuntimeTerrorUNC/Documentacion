@@ -41,12 +41,16 @@
 33. Ver Fixture 
 34. Cambiar Plantel Titular de una Liga
 
+> **DFD sin caso de uso asociado:** [DFD_SIN_CASO_ELIMINAR_CLUB.png](DFDs/DFD_SIN_CASO_ELIMINAR_CLUB.png). Actualmente no existe un caso de uso numerado para eliminar un club.
+
 
 
 
 ## Caso de Uso 1:
 
 Título:  Autenticar Usuario
+
+**DFD:** [Ver diagrama de Autenticar Usuario](DFDs/DFD_01_AUTENTICAR_USUARIO.png)
 
 Actor: Usuario
 
@@ -69,6 +73,8 @@ Casos Excepcionales:
 
 Título:  Registrar Usuario
 
+**DFD:** [Ver diagrama de Registrar Usuario](DFDs/DFD_02_REGISTRAR_USUARIO.png)
+
 Actor: Usuario
 
 Precondición: El Usuario no está Autenticado ni Registrado
@@ -87,6 +93,8 @@ Casos Excepcionales:
 ## Caso de Uso 3:
 
 Título:  Cerrar Sesión
+
+**DFD:** [Ver diagrama de Cerrar Sesión](DFDs/DFD_03_CERRAR_SESION.png)
 
 Actor: Usuario
 
@@ -107,6 +115,8 @@ Casos Alternativos:
 
 Título:  Crear Club
 
+**DFD:** [Ver diagrama de Crear Club](DFDs/DFD_04_CREAR_CLUB.png)
+
 Actor: Usuario
 
 Precondición: El Usuario está autenticado y No tiene club
@@ -124,6 +134,8 @@ Casos Excepcionales:
 ## Caso de Uso 5:
 
 Título:  Cambiar Nombre del Club
+
+**DFD:** [Ver diagrama de Cambiar Nombre del Club](DFDs/DFD_05_CAMBIAR_NOMBRE_DEL_CLUB.png)
 
 Actor: Usuario
 
@@ -146,6 +158,8 @@ Casos Excepcionales:
 
 Título:  Cambiar Avatar
 
+**DFD:** [Ver diagrama de Cambiar Avatar](DFDs/DFD_06_CAMBIAR_AVATAR.png)
+
 Actor: Usuario
 
 Precondición: Usuario autenticado y con club registrado.
@@ -164,6 +178,8 @@ Casos Excepcionales:
 ## Caso de Uso 7:
 
 Título:  Crear Jugador
+
+**DFD:** [Ver diagrama de Crear Jugador](DFDs/DFD_07_CREAR_JUGADOR.png)
 
 Actor: Usuario
 
@@ -187,6 +203,8 @@ Casos Excepcionales:
 
 Título:  Crear Comportamiento
 
+**DFD:** [Ver diagrama de Crear Comportamiento](DFDs/DFD_08_CREAR_COMPORTAMIENTO.png)
+
 Actor: Usuario
 
 Precondición: Usuario Autenticado; Tener Club
@@ -206,6 +224,8 @@ Casos Excepcionales:
 
 Título:  Listar Comportamientos
 
+**DFD:** [Ver diagrama de Listar Comportamientos](DFDs/DFD_09_LISTAR_COMPORTAMIENTOS.png)
+
 Actor: Usuario
 
 Precondición: Usuario Autenticado; Tener Club
@@ -222,6 +242,8 @@ Casos Excepcionales:
 ## Caso de Uso 10:
 
 Título:  Ver Comportamiento
+
+**DFD:** [Ver diagrama de Ver Comportamiento](DFDs/DFD_10_VER_COMPORTAMIENTO.png)
 
 Actor: Usuario
 
@@ -240,6 +262,8 @@ Casos Excepcionales:
 ## Caso de Uso 11:
 
 Título:  Modificar Comportamiento
+
+**DFD:** [Ver diagrama de Modificar Comportamiento](DFDs/DFD_11_MODIFICAR_COMPORTAMIENTO.png)
 
 Actor: Usuario
 
@@ -266,6 +290,8 @@ Casos Excepcionales:
 
 Título:  Eliminar Comportamiento
 
+**DFD:** [Ver diagrama de Eliminar Comportamiento](DFDs/DFD_12_ELIMINAR_COMPORTAMIENTO.png)
+
 Actor: Usuario
 
 Precondición: Usuario autenticado, con club registrado y con al menos dos comportamientos.
@@ -290,6 +316,8 @@ Casos Excepcionales:
 
 Título:  Listar Jugadores
 
+**DFD:** [Ver diagrama de Listar Jugadores](DFDs/DFD_13_LISTAR_JUGADORES.png)
+
 Actor: Usuario
 
 Precondición: Usuario Logueado; Tener Club.
@@ -306,6 +334,8 @@ Casos Excepcionales:
 ## Caso de Uso 14:
 
 Título:  Listar Ligas
+
+**DFD:** [Ver diagrama de Listar Ligas](DFDs/DFD_14_LISTAR_LIGAS.png)
 
 Actor: Usuario
 
@@ -349,6 +379,8 @@ Casos Excepcionales:
 
 Título: Salir de Liga
 
+**DFD:** [Ver diagrama de Salir de Liga](DFDs/DFD_16_SALIR_DE_LIGA.png)
+
 Actor: Usuario
 
 Precondición: Usuario autenticado; inscripto en la liga; la liga no ha generado su fixture (no inició); no ser el creador de la liga.
@@ -369,6 +401,8 @@ Casos Excepcionales:
 
 Título:  Eliminar Liga
 
+**DFD:** [Ver diagrama de Eliminar Liga](DFDs/DFD_17_ELIMINAR_LIGA.png)
+
 Actor: Usuario
 
 Precondición: Estar Autenticado; Tener Club; Haber creado la Liga y que no se haya iniciado 
@@ -388,6 +422,8 @@ Casos Excepcionales:
 ## Caso de Uso 18:
 
 Título:  Ver Clubes
+
+**DFD:** [Ver diagrama de Ver Clubes](DFDs/DFD_18_VER_CLUBES.png)
 
 Actor: Usuario
 
@@ -465,6 +501,8 @@ Casos Excepcionales:
 ## Caso de Uso 21:
 
 Título:  Crear Liga
+
+**DFD:** [Ver diagrama de Crear Liga](DFDs/DFD_21_CREAR_LIGA.png)
 
 Actor: Usuario
 
@@ -559,6 +597,8 @@ Casos Excepcionales:
 
 Título:  Ver Jugadores De Otro Club
 
+**DFD:** [Ver diagrama de Ver Jugadores de Otro Club](DFDs/DFD_26_VER_JUGADORES_DE_OTRO_CLUB.png)
+
 Actor: Usuario
 
 Precondición: Usuario Autenticado
@@ -576,6 +616,8 @@ Casos Excepcionales:
 ## Caso de Uso 27:
 
 Título:  Ver Plantel de un club en una liga
+
+**DFD:** [Ver diagrama de Ver Plantel de un Club en una Liga](DFDs/DFD_27_VER_PLANTEL_DE_UN_CLUB_EN_UNA_LIGA.png)
 
 Actor: Usuario
 
@@ -597,6 +639,8 @@ Casos Excepcionales:
 ## Caso de Uso 28:
 
 Título:  Ver Plantel de mi club en una Liga
+
+**DFD:** [Ver diagrama de Ver Plantel de mi Club en una Liga](DFDs/DFD_28_VER_PLANTEL_DE_MI_CLUB_EN_UNA_LIGA.png)
 
 Actor: Usuario
 
@@ -699,6 +743,8 @@ Casos Excepcionales:
 ## Caso de Uso 34:
 
 Título: Cambiar Plantel Titular de una Liga
+
+**DFD:** [Ver diagrama de Cambiar Plantel Titular de una Liga](DFDs/DFD_34_CAMBIAR_PLANTEL_TITULAR_DE_UNA_LIGA.png)
 Actor: Usuario
 Precondición: El usuario está inscripto en la liga; no hay un partido de esa liga en curso en este momento.
 
