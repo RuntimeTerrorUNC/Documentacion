@@ -1055,7 +1055,7 @@ Cada uno se ofrece ya implementado para que el usuario no tenga que escribirlo d
 
 - **Parámetros:** id_companero (Integer) — el compañero al que se le pasa la pelota.
 - **Comportamiento:** ejecuta patearConFuerza() hacia la posición actual de ese compañero, con una fuerza z fija
-- **Se basa en:** jugadores_propios() + distancia_a() + patearConFuerza().
+- **Se basa en:** jugadores_propios() +  patearConFuerza().
 - con una fuerza z de 15
 
 ### `despejar()`
