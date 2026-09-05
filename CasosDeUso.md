@@ -9,38 +9,37 @@
 5. Cambiar nombre club
 6. Cambiar avatar 
 7. Crear jugador
-8. Eliminar jugador
-9. Crear comportamiento
-10. Listar comportamiento
-11. Ver comportamiento
-12. Modificar comportamiento
-13. Eliminar comportamiento
-14. Listar jugadores
+8. Crear comportamiento
+9. Listar comportamiento
+10. Ver comportamiento
+11. Modificar comportamiento
+12. Eliminar comportamiento
+13. Listar jugadores
 
 ## Menú de juego
-15. Listar ligas 
-16. Unirse a liga 
-17. Salir de liga 
-18. Eliminar liga
-19. Ver clubes
-20. Invitar a Partido Amistoso
-21. Unirse a partido amistoso 
-22. Crear liga 
-23. Iniciar liga
+14. Listar ligas 
+15. Unirse a liga 
+16. Salir de liga 
+17. Eliminar liga
+18. Ver clubes
+19. Invitar a Partido Amistoso
+20. Unirse a partido amistoso 
+21. Crear liga 
+22. Iniciar liga
 
 ## Durante la liga
-24. Ver partido
-25. Dirigir partido
-26. Cambia comportamiento de jugador durante partido
-27. Ver jugadores de otro club 
-28. Ver plantel de un club en una liga X
-29. Ver plantel de mi club en una liga X
-30. Cambiar jugador durante partido
-31. Ver Tabla de liga
-32. Ver Tabla global
-33. Ver Partidos jugados 
-34. Ver Fixture 
-35. Equipo Predeterminado
+23. Ver partido
+24. Dirigir partido
+25. Cambia comportamiento de jugador durante partido
+26. Ver jugadores de otro club 
+27. Ver plantel de un club en una liga X
+28. Ver plantel de mi club en una liga X
+29. Cambiar jugador durante partido
+30. Ver Tabla de liga
+31. Ver Tabla global
+32. Ver Partidos jugados 
+33. Ver Fixture 
+34. Cambiar Plantel Titular de una Liga
 
 
 
@@ -76,8 +75,8 @@ Precondición: El Usuario no está Autenticado ni Registrado
 
 Caso de Exito (Flujo Principal):
 1. El Usuario ingresa un nombre, email y password.
-2. El sistema confirma los datos ingresados.
-3. El Usuario comienza a jugar 
+2. El sistema valida los datos ingresados.
+3. El sistema muestra pantalla de inicio  
 Casos Alternativos: 
 
 Casos Excepcionales:
@@ -160,7 +159,7 @@ Caso de Exito (Flujo Principal):
 4. El sistema valida el archivo subido, procesa y reemplaza el avatar anterior y le informa que la actualización fue exitosa.
 
 Casos Excepcionales:
-- 4.a) La extensión del archivo no es válida &rArr; El sistema rechaza la carga, le informa que solo admite formato .png o .jpg y le solicita que suba nuevamente el archivo
+- 4.a) La extensión del archivo no es válida &rArr; El sistema rechaza la carga, le informa que solo admite formato .jpg y le solicita que suba nuevamente el archivo
 - 4.b) El archivo excede el peso máximo &rArr; El sistema bloquea la carga, le informa el límite en megabytes(MB) y solicita subir un archivo más liviano
 
 ---
@@ -174,7 +173,7 @@ Precondición: Usuario Autenticado; Tener Club;
 
 Caso de Exito (Flujo Principal):
 1. El Usuario solicita la creación de un nuevo jugador.
-2. El Sistema solicita el nombre del jugador y la asignación numérica para sus 4 skills (Poder, Agilidad, Control, Velocidad y Fuerza).
+2. El Sistema solicita el nombre del jugador y la asignación numérica para sus 5 skills (Poder, Agilidad, Control, Velocidad y Fuerza).
 3. El Usuario ingresa el nombre y distribuye 300 puntos entre los atributos.
 4. El Sistema confirma los datos ingresados, crea y registra al jugador en el club y confirma la creación al usuario
 
@@ -264,7 +263,7 @@ Casos Excepcionales:
 - La nueva sintaxis es inválida &rArr; El sistema indica que hay errores de sintaxis
 
 ---
-## Caso de Uso 13:
+## Caso de Uso 12:
 
 Título:  Eliminar Comportamiento
 
@@ -288,7 +287,7 @@ Casos Excepcionales:
 - El comportamiento no existe &rArr;  El sistema indica la falla en el paso número 4. Espera que el usuario seleccione otro comportamiento.
 
 ---
-## Caso de Uso 14:
+## Caso de Uso 13:
 
 Título:  Listar Jugadores
 
@@ -305,7 +304,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 15:
+## Caso de Uso 14:
 
 Título:  Listar Ligas
 
@@ -322,7 +321,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 16:
+## Caso de Uso 15:
 
 Título:  Unirse a Liga
 
@@ -343,26 +342,31 @@ Casos Alternativos:
 
 Casos Excepcionales:
 - La capacidad de la liga está al maximo. &rArr; El sistema envia un mensaje al usuario en el paso número 2 indicando que la liga está completa.
-- La cantidad de jugadores es insuficiente &rArr; (CHARLAR SOLUCION: puede ser indicarle al jugador con un mensaje (aparentemente mas facil) o bloquear el botón de unirse a liga en caso de que tenga <6 jugadores (requiere cambiar el caso de uso).)
+- La cantidad de jugadores es insuficiente &rArr;
 - Contraseña de liga incorrecta &rArr; El sistema envía en el paso 4 un mensaje (“CONTRASEÑA INCORRECTA. INTENTE NUEVAMENTE”) al usuario.
+- Usuario ingreso menos de 6 jugadores -> el sistema informa que necesita convocar a 6 jugadores 3 titulares con comportamientos y 3 suplentes
 
 ---
-## Caso de Uso 17:
+## Caso de Uso 16:
 
-Título:  Salir de Liga
-
+Título: Salir de Liga
 Actor: Usuario
+Precondición: Usuario autenticado; inscripto en la liga; la liga no ha generado su fixture (no inició); no ser el creador de la liga.
 
-Precondición: 
+Caso de Éxito (Flujo Principal):
+1. El usuario elige la opción "Salir de Liga".
+2. El sistema muestra un aviso indicando que perderá su lugar en la sala.
+3. El usuario confirma la acción.
+4. El sistema remueve al club y a sus jugadores convocados de la liga, liberando el cupo, y redirige al usuario a la pantalla principal.
 
-Caso de Exito (Flujo Principal):
-
-Casos Alternativos: 
+Casos Alternativos:
+3.(a) El usuario rechaza la confirmación &rArr; El sistema cierra el aviso sin hacer cambios.
 
 Casos Excepcionales:
-
+- El usuario es el creador de la liga &rArr;El sistema bloquea la acción e indica que debe usar "Eliminar Liga" en su lugar.
+- La liga ya generó su fixture (ya inició) &rArr; El sistema bloquea la salida indicando que el torneo ya está en curso.
 ---
-## Caso de Uso 18:
+## Caso de Uso 17:
 
 Título:  Eliminar Liga
 
@@ -381,7 +385,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 19:
+## Caso de Uso 18:
 
 Título:  Ver Clubes
 
@@ -398,7 +402,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 20:
+## Caso de Uso 19:
 
 Título:  Invitar a Partido Amistoso
 
@@ -428,7 +432,7 @@ Casos Excepcionales:
 2. El usuario cancela la acción y el caso de uso finaliza.
 
 ---
-## Caso de Uso 21:
+## Caso de Uso 20:
 
 Título:  Unirse a Partido Amistoso
 
@@ -456,7 +460,7 @@ Casos Excepcionales:
 - 1. El sistema detecta que el Usuario no puede completar los 6 convocados o tácticas. Cancela la aceptación automáticamente y notifica al retador la falta de plantel.
 
 ---
-## Caso de Uso 22:
+## Caso de Uso 21:
 
 Título:  Crear Liga
 
@@ -467,7 +471,7 @@ Precondición: El usuario debe estar autenticado y tener un club
 Caso de Exito (Flujo Principal):
 1. El Usuario elige crear una liga
 2. El Sistema muestra al usuario los campos requeridos para crear una liga: nombre de la liga, contraseña(opcional), duración de partido, cantidad de equipos
-3. El Usuario completa los datos requeridos
+3. El Usuario completa los datos requeridos y da sus 6 jugadores respectivamente 3 titulares(con comportamiento) y sus 3 suplentes
 4. El Sistema crea la sala de la liga
 
 Casos Alternativos: 
@@ -476,23 +480,26 @@ Casos Excepcionales:
 - Los datos ingresados no cumplen los requisitos / Faltan &rArr; El sistema solicita reingresar los datos inválidos.
 
 ---
-## Caso de Uso 23:
+## Caso de Uso 22:
 
-Título:  Iniciar Liga
+Título: Iniciar Liga
+Actor: Usuario (creador de la liga)
+Precondición: Usuario autenticado; ser el creador legítimo de la liga; la liga está en estado de espera (no iniciada).
 
-Actor: Usuario
-
-Precondición: 
-
-Caso de Exito (Flujo Principal):
-
-Casos Alternativos: 
+Caso de Éxito (Flujo Principal):
+1. El usuario (creador) elige la opción "Iniciar Liga".
+2. El sistema verifica que se cumpla el mínimo de 3 clubes inscriptos.
+3. El sistema bloquea nuevos ingresos, genera el fixture de todos contra todos e inicializa la tabla de posiciones en cero.
+4. El sistema confirma el inicio y el torneo continúa automáticamente.
 
 Casos Excepcionales:
+- El usuario no es el creador de la liga &rArr; El sistema bloquea la acción.
+- No se alcanzó el mínimo de 3 clubes &rArr; El sistema cancela la operación, informa el motivo y mantiene la sala en espera.
+- La liga ya había sido iniciada previamente &rArr; El sistema informa que la acción ya fue realizada.
 
 ## Durante La Liga
 ---
-## Caso de Uso 24:
+## Caso de Uso 23:
 
 Título:  Ver Partido (de liga?)
 
@@ -509,7 +516,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 25:
+## Caso de Uso 24:
 
 Título:  Dirigir Partido (de liga?)
 
@@ -526,7 +533,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 26:
+## Caso de Uso 25:
 
 Título:  Cambiar Comportamiento de Jugador Durante Partido
 
@@ -546,7 +553,7 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 27:
+## Caso de Uso 26:
 
 Título:  Ver Jugadores De Otro Club
 
@@ -564,7 +571,7 @@ Casos Excepcionales:
 - El club no tiene jugadores aún &rArr; La sección jugadores indicará lo siguiente: “El club no ha fichado jugadores aún”
 
 ---
-## Caso de Uso 28:
+## Caso de Uso 27:
 
 Título:  Ver Plantel de un club en una liga
 
@@ -583,8 +590,9 @@ Casos Alternativos:
 Casos Excepcionales:
 - 3\.(a) El nombre ingresado del club no existe &rArr; el sistema informa que no hay ningún club con ese nombre
 
+
 ---
-## Caso de Uso 29:
+## Caso de Uso 28:
 
 Título:  Ver Plantel de mi club en una Liga
 
@@ -604,7 +612,7 @@ Casos Excepcionales:
 - El nombre de la liga que ingreso el usuario no existe &rArr; el sistema informa que no se encontró ninguna liga con ese nombre 
 
 ---
-## Caso de Uso 30:
+## Caso de Uso 29:
 
 Título:  Cambiar Jugador Durante Partido
 
@@ -615,15 +623,16 @@ Precondición: Estar Jugando/Dirigiendo un partido; Tener cambios disponibles
 Caso de Exito (Flujo Principal):
 1. El usuario selecciona al jugador que desea cambiar
 2. El sistema le muestra al jugador que jugadores están disponibles para el cambio
-3. El usuario elige el jugador que reemplaza al actual
-4. El sistema cierra el menú de elección y cambia de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”
+3. El usuario elige el jugador que reemplaza al actual 
+4. El usuario selecciona el comportamiento que tendrá el jugador entrante.
+5. El sistema cierra el menú de elección y cambia de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”
 
 Casos Alternativos: 
-2\.(a) El sistema le avisa al jugador que ese jugador no puede ser cambiado y cierra el menu de cambios (¿motivo?)
+
 Casos Excepcionales:
 
 ---
-## Caso de Uso 31:
+## Caso de Uso 30:
 
 Título:  Ver Tabla de Liga
 
@@ -640,22 +649,18 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 32:
+## Caso de Uso 31:
 
-Título:  Ver Tabla Global
-
+Título: Ver Tabla Global
 Actor: Usuario
+Precondición: Usuario autenticado; tener club registrado.
 
-Precondición: 
-
-Caso de Exito (Flujo Principal):
-
-Casos Alternativos: 
-
-Casos Excepcionales:
+Caso de Éxito (Flujo Principal):
+1. El usuario solicita ver el ranking global.
+2. El sistema muestra la clasificación de todos los clubes, ordenada por puntos obtenidos, goles a favor, con partidos jugados, ganados, empatados, perdidos
 
 ---
-## Caso de Uso 33:
+## Caso de Uso 32:
 
 Título:  Ver Partidos Jugados
 
@@ -673,7 +678,7 @@ Casos Excepcionales:
 - El usuario no ha jugado ningun partido &rArr; El sistema muestra un mensaje de error al usuario indicándole que no ha jugado ningún partido aun.
 
 ---
-## Caso de Uso 34:
+## Caso de Uso 33:
 
 Título:  Ver Fixture
 
@@ -690,21 +695,18 @@ Casos Alternativos:
 Casos Excepcionales:
 
 ---
-## Caso de Uso 35:
+## Caso de Uso 34:
 
-Título:  Establecer Configuraciones Predeterminadas
-
+Título: Cambiar Plantel Titular de una Liga
 Actor: Usuario
+Precondición: El usuario está inscripto en la liga; no hay un partido de esa liga en curso en este momento.
 
-Precondición:  El usuario debe estar en el menú de una liga
-
-Caso de Exito (Flujo Principal):
-1. El Usuario ingresa a la seccion “Configuraciones Predeterminadas”
-2. El sistema provee un formulario donde el usuario debe seleccionar una formacion predeterminada para el equipo y un comportamiento predeterminado para cada jugador.
-3. El usuario completa el formulario y lo envía
-4. El sistema carga los datos predeterminados para los convocados en esa liga.
-
-Casos Alternativos: 
+Caso de Éxito (Flujo Principal):
+1. El usuario solicita modificar su plantel para una liga en la que participa.
+2. El sistema muestra la convocatoria actual (titulares, suplentes, formación y comportamientos).
+3. El usuario selecciona 3 titulares (con comportamiento), 3 suplentes y la formación táctica.
+4. El sistema guarda los cambios, que se aplicarán a partir del próximo partido pendiente de esa liga.
 
 Casos Excepcionales:
-
+- Hay un partido de esta liga en curso &rArr; El sistema bloquea el cambio e informa que debe esperar a que finalice.
+- La estructura de titulares/suplentes es inválida o falta el comportamiento de algún titular &rArr; El sistema informa el error específico.
