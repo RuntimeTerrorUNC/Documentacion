@@ -569,38 +569,46 @@
 ---
 ## Caso de Uso 23:
 
-### Ver Partido (de liga?)
+### Ver Partido
 
-**Actor:** Usuario
+**Actor:** Usuario espectador
 
-**Precondición:** El Partido debe estar Iniciado / tiempo Prematch; El usuario debe encontrarse en el menú de una liga y no debe ser dueño del ninguno de los clubes que juegan el partido.
+**Precondición:** El usuario está autenticado, pertenece a la liga donde se disputa el partido y NO es dueño de ninguno de los dos clubes participantes. El partido debe estar en estado "Iniciado" o "Prematch".
 
-**Caso de Exito (Flujo Principal):**
+**Caso de Éxito (Flujo Principal):**
 
-**Casos Alternativos:** 
+1. El usuario solicita ver la lista de partidos en curso o el fixture de la liga.
+2. El sistema muestra los partidos disponibles para observar.
+3. El usuario selecciona el partido de liga que desea observar.
+4. El sistema valida que el partido pertenezca a su liga y que el usuario no sea participante del mismo.
+5. El sistema despliega la interfaz de espectador (solo visualización en tiempo real del partido y estadísticas, sin controles de mando).
 
-1. El usuario selecciona el partido que quiere ver
-2. El sistema provee la interfaz para que el usuario pueda ver el partido
+**Casos Alternativos:**
 
 **Casos Excepcionales:**
+
+3. El partido finaliza antes o durante la selección &rArr; El sistema notifica que el partido ya ha concluido y redirige al menú del fixture.
+4. El usuario intenta acceder a un partido amistoso o de una liga a la que no pertenece &rArr; El sistema deniega el acceso e informa que solo puede observar partidos de su liga.
 
 ---
+
 ## Caso de Uso 24:
 
-### Dirigir Partido (de liga?)
+### Dirigir Partido
 
-**Actor:** Usuario
+**Actor:** Usuario competidor
 
-**Precondición:** El Partido debe estar Iniciado. El usuario debe encontrarse en el menú de una liga. El usuario debe ser dueño de alguno de los clubes que juegan ese partido.
+**Precondición:** El usuario está autenticado y es dueño de uno de los dos clubes participantes en el partido (ya sea de Liga o Partido Amistoso). El partido debe estar en estado "Iniciado" o "Prematch".
 
-**Caso de Exito (Flujo Principal):**
-1. El usuario selecciona el partido que quiere dirigir
-2. El sistema provee la interfaz para que el usuario pueda ver el partido e interactuar con los jugadores (cambiar formacion, comportamientos y hacer los cambios)
+**Caso de Éxito (Flujo Principal):**
 
-**Casos Alternativos:** 
+1. El sistema notifica al usuario el inicio del partido o el usuario selecciona su partido desde el menú (Liga o Amistoso).
+2. El sistema valida que el usuario sea el dueño de uno de los clubes participantes.
+3. El sistema provee la interfaz de dirección técnica (permite ver el partido en tiempo real e interactuar mediante cambios de jugadores y asignación de comportamientos).
 
 **Casos Excepcionales:**
 
+2. El usuario intenta dirigir un partido donde no juega su club &rArr; El sistema bloquea las acciones de mando y, si es un partido de su liga, le ofrece redirigirlo a la interfaz de espectador (CU 23).
 ---
 ## Caso de Uso 25:
 
