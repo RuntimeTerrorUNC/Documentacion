@@ -22,6 +22,8 @@ Este índice relaciona cada DFD con el número y el título del caso de uso defi
 | 17 | Eliminar liga | [DFD_17_ELIMINAR_LIGA.png](DFD_17_ELIMINAR_LIGA.png) |
 | 18 | Ver clubes | [DFD_18_VER_CLUBES.png](DFD_18_VER_CLUBES.png) |
 | 21 | Crear liga | [DFD_21_CREAR_LIGA.png](DFD_21_CREAR_LIGA.png) |
+| 23 | Ver Partido | [DFD_23_VER_PARTIDO.png](DFD_23_VER_PARTIDO.png) |
+| 24 | Dirigir PArtido | [DFD_24_DIRIGIR_PARTIDO.png](DFD_24_DIRIGIR_PARTIDO.png) |
 | 26 | Ver jugadores de otro club | [DFD_26_VER_JUGADORES_DE_OTRO_CLUB.png](DFD_26_VER_JUGADORES_DE_OTRO_CLUB.png) |
 | 27 | Ver plantel de un club en una liga | [DFD_27_VER_PLANTEL_DE_UN_CLUB_EN_UNA_LIGA.png](DFD_27_VER_PLANTEL_DE_UN_CLUB_EN_UNA_LIGA.png) |
 | 28 | Ver plantel de mi club en una liga | [DFD_28_VER_PLANTEL_DE_MI_CLUB_EN_UNA_LIGA.png](DFD_28_VER_PLANTEL_DE_MI_CLUB_EN_UNA_LIGA.png) |
@@ -35,8 +37,6 @@ Este índice relaciona cada DFD con el número y el título del caso de uso defi
 - 19. Invitar a partido amistoso
 - 20. Unirse a partido amistoso
 - 22. Iniciar liga
-- 23. Ver partido
-- 24. Dirigir partido
 - 25. Cambiar comportamiento de jugador durante partido
 - 29. Cambiar jugador durante partido
 - 30. Ver tabla de liga

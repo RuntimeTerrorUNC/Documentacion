@@ -573,22 +573,19 @@
 
 **Actor:** Usuario espectador
 
-**Precondición:** El usuario está autenticado, pertenece a la liga donde se disputa el partido y NO es dueño de ninguno de los dos clubes participantes. El partido debe estar en estado "Iniciado" o "Prematch".
+**Precondición:** El usuario está autenticado, pertenece a la liga donde se disputa el partido y NO es dueño de ninguno de los dos clubes participantes.El partido debe estar en estado "Iniciado" o "Prematch".
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El usuario solicita ver la lista de partidos en curso o el fixture de la liga.
-2. El sistema muestra los partidos disponibles para observar.
-3. El usuario selecciona el partido de liga que desea observar.
-4. El sistema valida que el partido pertenezca a su liga y que el usuario no sea participante del mismo.
-5. El sistema despliega la interfaz de espectador (solo visualización en tiempo real del partido y estadísticas, sin controles de mando).
+1. El usuario selecciona el partido de liga que desea observar.
+2. El sistema valida que el partido pertenezca a su liga y que el usuario no sea participante del mismo.
+3. El sistema despliega la interfaz de espectador (solo visualización en tiempo real del partido y estadísticas, sin controles de mando).
 
 **Casos Alternativos:**
 
 **Casos Excepcionales:**
 
 3. El partido finaliza antes o durante la selección &rArr; El sistema notifica que el partido ya ha concluido y redirige al menú del fixture.
-4. El usuario intenta acceder a un partido amistoso o de una liga a la que no pertenece &rArr; El sistema deniega el acceso e informa que solo puede observar partidos de su liga.
 
 ---
 
@@ -608,7 +605,6 @@
 
 **Casos Excepcionales:**
 
-2. El usuario intenta dirigir un partido donde no juega su club &rArr; El sistema bloquea las acciones de mando y, si es un partido de su liga, le ofrece redirigirlo a la interfaz de espectador (CU 23).
 ---
 ## Caso de Uso 25:
 
