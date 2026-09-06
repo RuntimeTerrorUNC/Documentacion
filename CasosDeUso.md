@@ -129,7 +129,7 @@
 
 1. Usuario ingresa un nombre y un avatar
 2. El sistema valida los datos ingresados y notifica que el club fue creado.
-3. El Usuario ingresa al Home
+3. El Usuario ingresa al menu del club
 
 **Casos Excepcionales:**
 
@@ -206,7 +206,7 @@
 
 4. La suma de las skills es superior a 300 pts &rArr; El sistema le notifica la diferencia de puntos y solicita reajustar los valores.
 4. Nombre duplicado &rArr; El sistema le informa que el nombre ya existe en el club y solicita uno nuevo.
-4. Límite de jugadores alcanzado &rArr; El sistema le informa que alcanzó el límite de jugadores y le sugiere que elimine un jugador para crear al nuevo jugador
+4. Límite de jugadores alcanzado &rArr; El sistema le informa que alcanzó el límite de jugadores y cancela la operacion
 
 ---
 
@@ -247,10 +247,6 @@
 **Caso de Exito (Flujo Principal):**
 1. El usuario solicita listar comportamientos
 2. El sistema lista todos lo comportamientos de su club con su respectivo nombre
-
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
 
 ---
 ## Caso de Uso 10:
@@ -319,9 +315,6 @@
 6. El usuario confirma la eliminación del comportamiento
 7. El sistema elimina permanentemente el comportamiento.
 
-
-**Casos Alternativos:** 
-
 **Casos Excepcionales:**
 
 4. El comportamiento no existe &rArr;  El sistema indica la falla en el paso número 4. Espera que el usuario seleccione otro comportamiento.
@@ -341,10 +334,6 @@
 1. El usuario solicita listar jugadores
 2. El sistema lista todos lo jugadores de su club con sus respectivos nombres y skills
 
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 14:
 
@@ -359,10 +348,6 @@
 **Caso de Exito (Flujo Principal):**
 1. El usuario solicita listar ligas activas
 2. El sistema lista todas las ligas activas del juego con su respectiva id_liga, nombre, clubes esperando(ligas a la que si se puede unir o sea que no empezaron )
-
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
 
 ---
 ## Caso de Uso 15:
@@ -382,9 +367,6 @@
 4. El sistema verifica la contraseña y solicita una lista de convocados al usuario.
 5. El usuario selecciona sus jugadores titulares y suplentes y envía la lista del equipo.
 6. El sistema verifica la lista del equipo y actualiza la lista de clubes en la liga e ingresa al usuario y a sus jugadores.
-
-
-**Casos Alternativos:** 
 
 **Casos Excepcionales:**
 
@@ -413,8 +395,6 @@
 
 3. El usuario rechaza la confirmación &rArr; El sistema cierra el aviso sin hacer cambios.
 
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 17:
 
@@ -436,8 +416,6 @@
 
 3. El Usuario elige la opción rechazar &rArr; El Sistema cierra el aviso sin hacer cambios.
 
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 18:
 
@@ -452,10 +430,6 @@
 **Caso de Exito (Flujo Principal):**
 1. El usuario solicita listar clubes.
 2. El sistema lista todos lo clubes del juego con sus respectivo nombre y avatar.
-
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
 
 ---
 ## Caso de Uso 19:
@@ -522,6 +496,7 @@
 **Casos Excepcionales:**
 
 4. El Usuario no cuenta con los requisitos mínimos para armar la plantilla:
+
 	1. El sistema detecta que el Usuario no puede completar los 6 convocados o tácticas. Cancela la aceptación automáticamente y notifica al retador la falta de plantel.
 
 ---
@@ -540,8 +515,6 @@
 2. El Sistema muestra al usuario los campos requeridos para crear una liga: nombre de la liga, contraseña(opcional), duración de partido, cantidad de equipos.
 3. El Usuario completa los datos requeridos y da sus 6 jugadores respectivamente 3 titulares(con comportamiento) y sus 3 suplentes.
 4. El Sistema verifica los datos requeridos que envio el usuario y crea la sala de la liga.
-
-**Casos Alternativos:** 
 
 **Casos Excepcionales:**
 
@@ -586,8 +559,6 @@
 2. El sistema valida que el partido pertenezca a su liga y que el usuario no sea participante del mismo.
 3. El sistema despliega la interfaz de espectador (solo visualización en tiempo real del partido y estadísticas, sin controles de mando).
 
-**Casos Alternativos:**
-
 **Casos Excepcionales:**
 
 3. El partido finaliza antes o durante la selección &rArr; El sistema notifica que el partido ya ha concluido y redirige al menú del fixture.
@@ -610,8 +581,6 @@
 2. El sistema valida que el usuario sea el dueño de uno de los clubes participantes.
 3. El sistema provee la interfaz de dirección técnica (permite ver el partido en tiempo real e interactuar mediante cambios de jugadores y asignación de comportamientos).
 
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 25:
 
@@ -633,8 +602,6 @@
 
 3. El jugador selecciona el botón “atrás” &rArr; El sistema no realiza cambios y cierra el menú de comportamientos
 
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 26:
 
@@ -649,8 +616,6 @@
 **Caso de Exito (Flujo Principal):**
 1. El Usuario selecciona el club deseado en la sección de “Clubes” y solicita los datos del club
 2. El Sistema recopila los datos del club (sus ultimos 5 partidos jugados, nombre, avatar y plantel) y muestra por pantalla.
-
-**Casos Alternativos:** 
 
 **Casos Excepcionales:**
 
@@ -672,8 +637,6 @@
 2. El sistema solicita el nombre del club para listar los jugadores
 3. El usuario ingresa el nombre del club
 4. El sistema lista todos los jugadores de ese club con su respectivo nombre y skills
-
-**Casos Alternativos:** 
 
 **Casos Excepcionales:**
 
@@ -697,8 +660,6 @@
 3. El usuario ingresa el nombre de la liga
 4. El sistema devuelve el plantel de su club que juega en la liga que solicitó el usuario 
 
-**Casos Alternativos:** 
-
 **Casos Excepcionales:**
 
 3. El nombre de la liga que ingreso el usuario no existe &rArr; el sistema informa que no se encontró ninguna liga con ese nombre 
@@ -721,10 +682,6 @@
 4. El usuario selecciona el comportamiento que tendrá el jugador entrante.
 5. El sistema cierra el menú de elección y cambia de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”
 
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 30:
 
@@ -739,10 +696,6 @@
 **Caso de Exito (Flujo Principal):**
 1. Usuario solicita ver la tabla de una liga.
 2. El sistema muestra la tabla de posiciones de la liga según los resultados obtenidos y los criterios de clasificación establecidos con los siguientes campos:Número de posición,club,cantidad de partidos jugados,cantidad de partidos ganados,cantidad de partidos perdidos,cantidad de partidos empatados,goles a favor,goles en contra,goles de diferencia y puntos.
-
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
 
 ---
 ## Caso de Uso 31:
@@ -774,10 +727,6 @@
 1. El usuario solicita ver su historial de partidos completo
 2. El sistema solicita los datos de partidos jugados de ese usuario y los muestra en pantalla
 
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
-
 ---
 ## Caso de Uso 33:
 
@@ -792,10 +741,6 @@
 **Caso de Exito (Flujo Principal):**
 1. Usuario solicita ver el fixture completo de una liga.
 2. El sistema muestra las fechas,los equipos que disputan y su resultado(si es que ya sucedieron) o el resultado en vivo si es que se está jugando. Para los no diputados se indica que están pendientes.
-
-**Casos Alternativos:** 
-
-**Casos Excepcionales:**
 
 ---
 ## Caso de Uso 34:
