@@ -18,29 +18,23 @@ Este índice relaciona cada DFD con el número y el título del caso de uso defi
 | 12 | Eliminar comportamiento | [DFD_12_ELIMINAR_COMPORTAMIENTO.png](DFD_12_ELIMINAR_COMPORTAMIENTO.png) |
 | 13 | Listar jugadores | [DFD_13_LISTAR_JUGADORES.png](DFD_13_LISTAR_JUGADORES.png) |
 | 14 | Listar ligas | [DFD_14_LISTAR_LIGAS.png](DFD_14_LISTAR_LIGAS.png) |
+| 15 | Unirse a liga | [DFD_15_UNIRSE_LIGA.png](DFD_15_UNIRSE_LIGA.png) |
 | 16 | Salir de liga | [DFD_16_SALIR_DE_LIGA.png](DFD_16_SALIR_DE_LIGA.png) |
 | 17 | Eliminar liga | [DFD_17_ELIMINAR_LIGA.png](DFD_17_ELIMINAR_LIGA.png) |
 | 18 | Ver clubes | [DFD_18_VER_CLUBES.png](DFD_18_VER_CLUBES.png) |
+| 19 | Invitar o crear amistosos | [DFD_19_INVITAR_PARTIDO_AMISTOSO.png](DFD_19_INVITAR_PARTIDO_AMISTOSO.png) |
+| 20 | Ver clubes | [DFD_20_UNIRSE_PARTIDO_AMISTOSO.png](DFD_20_UNIRSE_PARTIDO_AMISTOSO.png) |
 | 21 | Crear liga | [DFD_21_CREAR_LIGA.png](DFD_21_CREAR_LIGA.png) |
 | 22 | Iniciar Liga | [DFD_22_INICIAR_LIGA.png](DFD_22_INICIAR_LIGA.png) |
 | 23 | Ver Partido | [DFD_23_VER_PARTIDO.png](DFD_23_VER_PARTIDO.png) |
-| 24 | Dirigir PArtido | [DFD_24_DIRIGIR_PARTIDO.png](DFD_24_DIRIGIR_PARTIDO.png) |
+| 24 | Dirigir Partido | [DFD_24_DIRIGIR_PARTIDO.png](DFD_24_DIRIGIR_PARTIDO.png) |
+| 25 | Cambiar Comportamiento durante el partido | [DFD_25_CAMBIAR_COMPORTAMIENTO.png](DFD_25_CAMBIAR_COMPORTAMIENTO.png) |
 | 26 | Ver jugadores de otro club | [DFD_26_VER_JUGADORES_DE_OTRO_CLUB.png](DFD_26_VER_JUGADORES_DE_OTRO_CLUB.png) |
 | 27 | Ver plantel de un club en una liga | [DFD_27_VER_PLANTEL_DE_UN_CLUB_EN_UNA_LIGA.png](DFD_27_VER_PLANTEL_DE_UN_CLUB_EN_UNA_LIGA.png) |
 | 28 | Ver plantel de mi club en una liga | [DFD_28_VER_PLANTEL_DE_MI_CLUB_EN_UNA_LIGA.png](DFD_28_VER_PLANTEL_DE_MI_CLUB_EN_UNA_LIGA.png) |
+| 29 | Cambiar jugador durente el partido | [DFD_29_CAMBIAR_JUGADOR_DURANTE_PARTIDO.png](DFD_29_CAMBIAR_JUGADOR_DURANTE_PARTIDO.png) |
 | 30 | Ver tabla de liga | [DFD_30_VER_TABLA_DE_LIGA.png](DFD_30_VER_TABLA_DE_LIGA.png) |
 | 31 | Ver tabla global | [DFD_31_VER_TABLA_GLOBAL.png](DFD_31_VER_TABLA_GLOBAL.png) |
+| 32 | Ver partidos Jugados | [DFD_32_VER_PARTIDOS_JUGADOS.png](DFD_32_VER_PARTIDOS_JUGADOS.png) |
 | 33 | Ver fixture | [DFD_33_VER_FIXTURE.png](DFD_33_VER_FIXTURE.png) |
 | 34 | Cambiar plantel titular de una liga | [DFD_34_CAMBIAR_PLANTEL_TITULAR_DE_UNA_LIGA.png](DFD_34_CAMBIAR_PLANTEL_TITULAR_DE_UNA_LIGA.png) |
-| — | Sin correspondencia en `CasosDeUso.md`: Eliminar club | [DFD_SIN_CASO_ELIMINAR_CLUB.png](DFD_SIN_CASO_ELIMINAR_CLUB.png) |
-
-##  DFD FALTANTES
-
-
-- 15. Unirse a liga
-- 19. Invitar a partido amistoso
-- 20. Unirse a partido amistoso
-- 25. Cambiar comportamiento de jugador durante partido
-- 29. Cambiar jugador durante partido
-- 32. Ver partidos jugados
-
