@@ -499,7 +499,7 @@
 
 ### Unirse a Partido Amistoso
 
-**DFD:** [Recibir/Aceptar Invitación a Partido Amistoso](DFDs/DFD_UNIRSE_PARTIDO_AMISTOSO.png)
+**DFD:** [Recibir/Aceptar Invitación a Partido Amistoso](DFDs/DFD_20_UNIRSE_PARTIDO_AMISTOSO.png)
 
 **Actor:** Usuario
 
