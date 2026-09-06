@@ -41,18 +41,14 @@
 33. Ver Fixture 
 34. Cambiar Plantel Titular de una Liga
 
-> **DFD sin caso de uso asociado:** [DFD_SIN_CASO_ELIMINAR_CLUB.png](DFDs/DFD_SIN_CASO_ELIMINAR_CLUB.png). Actualmente no existe un caso de uso numerado para eliminar un club.
-
-
-
-
 ## Caso de Uso 1:
 
 ### Autenticar Usuario
 
 **DFD:** [Ver diagrama de Autenticar Usuario](DFDs/DFD_01_AUTENTICAR_USUARIO.png)
 
-**Actor:** Usuario  
+**Actor:** Usuario
+
 **Precondición:** El usuario no está autenticado
 
 **Caso de éxito:**
@@ -373,6 +369,8 @@
 
 ### Unirse a Liga
 
+**DFD:** [Ver diagrama de Unirse a liga](DFDs/DFD_15_UNIRSE_LIGA.png)
+
 **Actor:** Usuario
 
 **Precondición:** Usuario autenticado, con club registrado y tener 6 jugadores disponibles
@@ -554,6 +552,8 @@
 
 ### Iniciar Liga
 
+**DFD:** [Ver diagrama de Iniciar Liga](DFDs/DFD_22_INICIAR_LIGA.png)
+
 **Actor:** Usuario (creador de la liga)
 
 **Precondición:** Usuario autenticado; ser el creador legítimo de la liga; la liga está en estado de espera (no iniciada).
@@ -573,6 +573,8 @@
 ## Caso de Uso 23:
 
 ### Ver Partido
+
+**DFD:** [Ver diagrama de Ver partido](DFDs/DFD_23_VER_PARTIDO.png)
 
 **Actor:** Usuario espectador
 
@@ -596,6 +598,8 @@
 
 ### Dirigir Partido
 
+**DFD:** [Ver diagrama de Dirigir partido](DFDs/DFD_24_DIRIGIR_PARTIDO.png)
+
 **Actor:** Usuario competidor
 
 **Precondición:** El usuario está autenticado y es dueño de uno de los dos clubes participantes en el partido (ya sea de Liga o Partido Amistoso). El partido debe estar en estado "Iniciado" o "Prematch".
@@ -612,6 +616,8 @@
 ## Caso de Uso 25:
 
 ### Cambiar Comportamiento de Jugador Durante Partido
+
+**DFD:** [Ver diagrama de Cambiar comportamiento](DFDs/DFD_25_CAMBIAR_COMPORTAMIENTO.png)
 
 **Actor:** Usuario
 
@@ -702,6 +708,8 @@
 
 ### Cambiar Jugador Durante Partido
 
+**DFD:** [Ver diagrama de Cambiar Jugador](DFDs/DFD_29_CAMBIAR_JUGADOR_DURANTE_PARTIDO.png)
+
 **Actor:** Usuario
 
 **Precondición:** Estar Jugando/Dirigiendo un partido; Tener cambios disponibles
@@ -722,6 +730,8 @@
 
 ### Ver Tabla de Liga
 
+**DFD:** [Ver diagrama de Ver tabla de liga](DFDs/DFD_30_VER_TABLA_DE_LIGA.png)
+
 **Actor:** Usuario
 
 **Precondición:** Usuario Logueado; Club registrado; Usuario en el lobby de una liga en la que participa.
@@ -739,6 +749,8 @@
 
 ### Ver Tabla Global
 
+**DFD:** [Ver diagrama de Ver tabla de global](DFDs/DFD_31_VER_TABLA_GLOBAL.png)
+
 **Actor:** Usuario
 
 **Precondición:** Usuario autenticado; tener club registrado.
@@ -751,6 +763,8 @@
 ## Caso de Uso 32:
 
 ### Ver Partidos Jugados
+
+**DFD:** [Ver diagrama de Ver partidos jugados](DFDs/DFD_32_VER_PARTIDOS_JUGADOS.png)
 
 **Actor:** Usuario
 
@@ -768,6 +782,8 @@
 ## Caso de Uso 33:
 
 ### Ver Fixture
+
+**DFD:** [Ver diagrama de Ver fixture](DFDs/DFD_33_VER_FIXTURE.png)
 
 **Actor:** Usuario
 
