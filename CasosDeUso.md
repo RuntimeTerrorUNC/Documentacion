@@ -464,22 +464,23 @@
 
 ### Invitar a Partido Amistoso
 
+**DFD:** [Invitar Club a Partido Amistoso](DFDs/DFD_19_INVITAR_PARTIDO_AMISTOSO.png)
+
 **Actor:** Usuario Retador
 
 **Precondición:** Usuario autenticado y con club registrado y el usuario retador tiene mas de 5 jugadores.
 
 **Caso de Exito (Flujo Principal):**
-1. El Usuario Retador selecciona la sección "Clubes".
+1. El Usuario Retador ingresa a la sección "Clubes".
 2. El sistema muestra la lista de clubes disponibles.
 3. El Usuario Retador selecciona un club rival y pulsa "Partido Amistoso".
 4. El sistema solicita seleccionar 6 jugadores, formación táctica y comportamientos iniciales.
 5. El Usuario Retador configura su alineación y confirma la solicitud.
 6. El sistema verifca la configuracion y envía la invitación al Usuario Rival e inicia el temporizador de espera.
-7. El sistema notifica al Usuario Retador que la solicitud fue enviada exitosamente.
 
 **Casos Alternativos:** 
 
-7. La solicitud es rechazada o expira:
+6\.(a) La solicitud es rechazada o expira:
 	1. El sistema recibe la notificación de rechazo o fin del temporizador e informa al Usuario retador que el partido no se llevará a cabo.
 
 **Casos Excepcionales:**
@@ -497,6 +498,8 @@
 ## Caso de Uso 20:
 
 ### Unirse a Partido Amistoso
+
+**DFD:** [Recibir/Aceptar Invitación a Partido Amistoso](DFDs/DFD_UNIRSE_PARTIDO_AMISTOSO.png)
 
 **Actor:** Usuario
 
