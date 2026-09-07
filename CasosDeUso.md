@@ -82,12 +82,11 @@
 
 **Caso de éxito:**
 
-1. El sistema pide user y contraseña.
-2. El usuario ingresa un user y una contraseña para registrar su cuenta.
-3. El sistema valida la entrada.
-4. El sistema verifica que no existan usuarios registrados con el mismo user.
-5. El sistema crea su cuenta.
-6. El sistema muestra la pantalla de inicio.
+1. El usuario solicita registrarse
+1. El sistema despleiga un formulario y pide user, email y contraseña.
+2. El usuario ingresa un user, un email y una contraseña para registrar su cuenta.
+3. El sistema valida la sintaxis de la entrada, verifica que el username es unico y crea su cuenta
+6. El sistema redirige al usuario a la pantalla de inicio
 
 **Caso excepcional:**
 
