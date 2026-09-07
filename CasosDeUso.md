@@ -60,15 +60,15 @@
 3. El usuario ingresa credenciales user y password
 4. El sistema chequea las credenciales.
 5. El sistema permite el acceso.
-6. El sistema muestra la pantalla de inicio de su club.
+6. El sistema muestra la pantalla correspondiente al estado de la cuenta: la pantalla de creación de club si el usuario todavía no tiene club, o la pantalla de inicio de su club si ya lo tiene.
 
 **Caso excepcional:**
 
-2.a. El user no existe -> el sistema informa `user or password is incorrect`.
+4.a. El user no existe -> el sistema informa "el usuario o la contraseña son incorrectos".
 
-2.b. La contraseña es incorrecta -> el sistema informa `user or password is incorrect`.
+4.b. La contraseña es incorrecta -> el sistema informa "el usuario o la contraseña son incorrectos".
 
-2.c. Entrada no válida -> el sistema informa de caracteres incorrectos.
+4.c. Entrada no válida -> el sistema informa de caracteres incorrectos.
 
 --- 
 
@@ -83,16 +83,17 @@
 **Caso de éxito:**
 
 1. El usuario solicita registrarse
-1. El sistema despleiga un formulario y pide user, email y contraseña.
-2. El usuario ingresa un user, un email y una contraseña para registrar su cuenta.
-3. El sistema valida la sintaxis de la entrada, verifica que el username es unico y crea su cuenta
-6. El sistema redirige al usuario a la pantalla de inicio
+2. El sistema despliega un formulario y pide user, email y contraseña.
+3. El usuario ingresa un user, un email y una contraseña para registrar su cuenta.
+4. El sistema valida la sintaxis de la entrada.
+5. El sistema verifica que el username sea único y crea la cuenta.
+6. El sistema redirige al usuario a la pantalla de creación de club, porque todavía no tiene un club.
 
 **Caso excepcional:**
 
-2.a. El usuario ingresa caracteres no válidos -> el sistema informa caracteres incorrectos.
+3.a. El usuario ingresa caracteres no válidos -> el sistema informa caracteres incorrectos.
 
-4.a. El usuario intenta registrar un user ya registrado -> el sistema le pide que cambie el user.
+5.a. El usuario intenta registrar un user ya registrado -> el sistema le pide que cambie el user.
 
 ---
 
@@ -214,11 +215,11 @@
 
 **Casos Excepcionales:**
 
-4.a. La suma de las skills es superior a 300 pts -> El sistema le notifica la diferencia de puntos y solicita reajustar los valores.
+4.a. La suma de las skills es distinta de 300 pts -> El sistema le notifica la diferencia de puntos y solicita reajustar los valores.
 
 4.b. Nombre duplicado -> El sistema le informa que el nombre ya existe en el club y solicita uno nuevo.
 
-4.c. Límite de jugadores alcanzado -> El sistema le informa que alcanzó el límite de jugadores y cancela la operación.
+4.c. Límite de 50 jugadores alcanzado -> El sistema informa que se alcanzó el límite, invita a eliminar un jugador antes de reintentar y cancela la operación.
 
 ---
 
@@ -596,6 +597,10 @@
 
 **Casos Excepcionales:**
 
+1.a. El usuario no es el creador legítimo de la liga -> El sistema rechaza la operación e informa que solo el creador puede iniciarla.
+
+1.b. La liga ya fue iniciada -> El sistema rechaza la operación e informa que no puede iniciarse nuevamente.
+
 2.a. No se alcanzó el mínimo de 3 clubes -> El sistema cancela la operación, informa el motivo y mantiene la sala en espera.
 
 ---
@@ -713,6 +718,8 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 2.a. El nombre ingresado de la liga no existe -> El sistema informa que no hay ningúna liga con ese nombre.
 
 3.a. El club no participa en esa liga -> el sistema informa que ese club no juega esa liga
+
+4.a. La liga es privada y el usuario no participa en ella -> el sistema rechaza la consulta e informa que no tiene autorización para ver ese plantel.
 ---
 
 ## Caso de Uso 28:
@@ -756,6 +763,12 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 4. El usuario selecciona el comportamiento que tendrá el jugador entrante.
 5. El sistema cierra el menú de elección y realiza el cambio de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”.
 
+**Casos Excepcionales:**
+
+3.a. El jugador seleccionado no está disponible o el titular indicado no está en cancha -> el sistema rechaza el cambio e informa el motivo.
+
+5.a. No hay cambios disponibles para la pausa actual -> el sistema rechaza la solicitud e informa que debe esperar una pausa posterior.
+
 ---
 
 ## Caso de Uso 30:
@@ -788,7 +801,7 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario solicita ver el ranking global.
-2. El sistema muestra la tabla de posiciones según los resultados obtenidos y los criterios de clasificación establecidos con los siguientes campos: Número de posición, club, cantidad de partidos jugados, cantidad de partidos ganados, cantidad de partidos perdidos, cantidad de partidos empatados, goles a favor, goles en contra, goles de diferencia y puntos.
+2. El sistema muestra la tabla de posiciones según los resultados obtenidos y los criterios de clasificación establecidos con los siguientes campos: Número de posición, club, cantidad de partidos jugados, cantidad de partidos ganados, cantidad de partidos empatados, cantidad de partidos perdidos, goles a favor y puntos.
 
 ---
 
@@ -846,3 +859,5 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 **Casos Excepcionales:**
 
 3.a. La estructura de titulares/suplentes es inválida o falta el comportamiento de algún titular -> El sistema informa el error específico.
+
+4.a. Hay un partido de esa liga en curso -> el sistema rechaza el cambio e informa que debe esperar a que finalice el partido.
