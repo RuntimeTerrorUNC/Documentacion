@@ -422,7 +422,7 @@
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado; inscripto en la liga; la liga no ha generado su fixture (no inició); no ser el creador de la liga.
+**Precondición:** Estar inscripto en la liga; la liga no inició; no ser el creador de la liga.
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -487,20 +487,20 @@
 
 **Actor:** Usuario Retador
 
-**Precondición:** Usuario autenticado, con club registrado y el usuario retador tiene más de 5 jugadores.
+**Precondición:** tener Club registrado y el usuario retador tiene al menos 6 jugadores y 1 comportamiento.
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El Usuario Retador ingresa a la sección "Clubes".
-2. El sistema muestra la lista de clubes disponibles.
-3. El Usuario Retador selecciona un club rival y pulsa "Partido Amistoso".
-4. El sistema solicita seleccionar 6 jugadores, formación táctica y comportamientos iniciales.
-5. El Usuario Retador configura su alineación y confirma la solicitud.
-6. El sistema verifica la configuración, envía la invitación al Usuario Rival e inicia el temporizador de espera.
+1. El Usuario Retador selecciona un club rival y pulsa "Partido Amistoso".
+2. El sistema solicita seleccionar 6 jugadores, formación táctica y comportamientos iniciales.
+3. El Usuario Retador configura su alineación y confirma la solicitud.
+4. El sistema verifica la configuración, envía la invitación al Usuario Rival e inicia el temporizador de espera.
 
 **Casos Alternativos:** 
 
-6.a. La solicitud es rechazada o expira -> El sistema recibe la notificación de rechazo o fin del temporizador e informa al Usuario retador que el partido no se llevará a cabo.
+2.a. La solicitud es rechazada o expira -> El sistema recibe la notificación de rechazo o fin del temporizador e informa al Usuario retador que el partido no se llevará a cabo.
+
+
 
 **Casos Excepcionales:**
 
@@ -509,10 +509,6 @@
    1. El sistema valida el rival y bloquea la acción informando que no tiene plantel suficiente.
    2. El flujo regresa al paso 2.
 
-5.a. El Usuario Retador no cumple con los requisitos mínimos de convocatoria:
-
-   1. El sistema detecta que faltan jugadores o comportamientos requeridos. Deshabilita el botón de confirmación y muestra el motivo.
-   2. El usuario cancela la acción y el caso de uso finaliza.
 
 6.b. Al usuario le faltó seleccionar algún jugador, formación o comportamiento inicial -> El sistema notifica el campo faltante y lo retorna a la lista de clubes disponibles.
 
@@ -526,7 +522,7 @@
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado con club registrado y una invitación activa recibida.
+**Precondición:** Tener una invitación activa recibida.
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -547,12 +543,6 @@
 
    1. El sistema detecta el vencimiento del tiempo límite, descarta la invitación y notifica al Usuario Retador.
 
-**Casos Excepcionales:**
-
-2.a. El Usuario no cuenta con los requisitos mínimos para armar la plantilla:
-
-   1. El sistema da aviso y cancela la acción.
-
 ---
 
 ## Caso de Uso 21:
@@ -563,13 +553,13 @@
 
 **Actor:** Usuario
 
-**Precondición:** El usuario debe estar autenticado, tener un club y poseer más de 5 jugadores.
+**Precondición:** tener Club registrado y el usuario retador tiene al menos 6 jugadores y 1 comportamiento.
 
 **Caso de Éxito (Flujo Principal):**
 
 1. El Usuario elige crear una liga.
 2. El Sistema muestra al usuario los campos requeridos para crear una liga: nombre de la liga, contraseña (opcional), duración de partido, cantidad de equipos.
-3. El Usuario completa los datos requeridos y asigna sus 6 jugadores (3 titulares con comportamiento y 3 suplentes).
+3. El Usuario completa los datos requeridos(max de jugadores, tiempo de los partidos, etc) y asigna sus 6 jugadores (3 titulares con comportamiento y 3 suplentes).
 4. El Sistema verifica los datos requeridos enviados por el usuario y crea la sala de la liga.
 
 **Casos Excepcionales:**
@@ -586,7 +576,7 @@
 
 **Actor:** Usuario (creador de la liga)
 
-**Precondición:** Usuario autenticado; ser el creador legítimo de la liga; la liga está en estado de espera (no iniciada).
+**Precondición:** Ser el creador  de la liga y no debe estar iniciada.
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -617,7 +607,7 @@
 
 **Actor:** Usuario espectador
 
-**Precondición:** El usuario está autenticado, pertenece a la liga donde se disputa el partido y NO es dueño de ninguno de los dos clubes participantes. El partido debe estar en estado "Iniciado" o "Prematch".
+**Precondición:** Pertenecer a la liga donde se disputa el partido y NO es dueño de ninguno de los dos clubes participantes. El partido debe estar en estado "Iniciado" o "Prematch".
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -639,11 +629,11 @@
 
 **Actor:** Usuario competidor
 
-**Precondición:** El usuario está autenticado y es dueño de uno de los dos clubes participantes en el partido (ya sea de Liga o Partido Amistoso). El partido debe estar en estado "Iniciado" o "Prematch".
+**Precondición:** Ser dueño de uno de los dos clubes participantes en el partido (ya sea de Liga o Partido Amistoso). El partido debe estar en estado "Iniciado" o "Prematch".
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El sistema notifica al usuario el inicio del partido o el usuario selecciona su partido desde el menú (Liga o Amistoso).
+1. El usuario selecciona su partido desde el menú (Liga o Amistoso).
 2. El sistema valida que el usuario sea el dueño de uno de los clubes participantes.
 3. El sistema provee la interfaz de dirección técnica (permite ver el partido en tiempo real e interactuar mediante cambios de jugadores y asignación de comportamientos).
 
@@ -730,18 +720,16 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Actor:** Usuario
 
-**Precondición:** Estar logueado; El usuario debe tener club; El Usuario debe pertenecer a la liga.
+**Precondición:**  El usuario debe tener club y pertenecer a la liga.
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El usuario solicita ver su plantel en una liga.
-2. El sistema solicita una liga (para devolver el plantel que esté jugando en esa liga).
-3. El usuario ingresa el nombre de la liga.
-4. El sistema devuelve el plantel de su club que juega en la liga que solicitó el usuario.
+1. El usuario solicita ver su plantel en una liga e ingresa el nombre de la liga.
+2. El sistema verifica el nombre de la liga y devuelve el plantel de su club que juega en la liga que solicitó el usuario.
 
 **Casos Excepcionales:**
 
-3.a. El nombre de la liga que ingresó el usuario no existe -> El sistema informa que no se encontró ninguna liga con ese nombre.
+1.a. El nombre de la liga que ingresó el usuario no existe -> El sistema informa que no se encontró ninguna liga con ese nombre.
 
 ---
 
@@ -759,15 +747,14 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 1. El usuario selecciona al jugador que desea cambiar.
 2. El sistema le muestra al usuario qué jugadores están disponibles para el cambio.
-3. El usuario elige el jugador que reemplaza al actual.
-4. El usuario selecciona el comportamiento que tendrá el jugador entrante.
-5. El sistema cierra el menú de elección y realiza el cambio de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”.
+3. El usuario elige el jugador que reemplaza al actual y selecciona el comportamiento que tendrá el jugador entrante.
+4. El sistema cierra el menú de elección y realiza el cambio de jugador cuando ocurra el evento de “pausa de hidratación” o “medio tiempo”.
 
 **Casos Excepcionales:**
 
 3.a. El jugador seleccionado no está disponible o el titular indicado no está en cancha -> el sistema rechaza el cambio e informa el motivo.
 
-5.a. No hay cambios disponibles para la pausa actual -> el sistema rechaza la solicitud e informa que debe esperar una pausa posterior.
+4.a. No hay cambios disponibles para la pausa actual -> el sistema rechaza la solicitud e informa que debe esperar una pausa posterior.
 
 ---
 
@@ -779,12 +766,12 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Actor:** Usuario
 
-**Precondición:** Usuario Logueado; Club registrado; Usuario en el lobby de una liga en la que participa.
+**Precondición:** Usuario en el lobby de una liga en la que participa.
 
 **Caso de Éxito (Flujo Principal):**
 
 1. Usuario solicita ver la tabla de una liga.
-2. El sistema muestra la tabla de posiciones de la liga según los resultados obtenidos y los criterios de clasificación establecidos con los siguientes campos: Número de posición, club, cantidad de partidos jugados, cantidad de partidos ganados, cantidad de partidos perdidos, cantidad de partidos empatados, goles a favor, goles en contra, goles de diferencia y puntos.
+2. El sistema muestra la tabla de posiciones de la liga según los resultados obtenidos y los criterios de clasificación.
 
 ---
 
@@ -796,12 +783,12 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado; tener club registrado.
+**Precondición:** Tener club registrado.
 
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario solicita ver el ranking global.
-2. El sistema muestra la tabla de posiciones según los resultados obtenidos y los criterios de clasificación establecidos con los siguientes campos: Número de posición, club, cantidad de partidos jugados, cantidad de partidos ganados, cantidad de partidos empatados, cantidad de partidos perdidos, goles a favor y puntos.
+2. El sistema muestra la tabla de posiciones de la liga según los resultados obtenidos y los criterios de clasificación.
 
 ---
 
@@ -813,7 +800,7 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado; Club registrado.
+**Precondición:** Club registrado.
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -830,7 +817,7 @@ y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Actor:** Usuario
 
-**Precondición:** Usuario Logueado; Club Registrado; Usuario está en el lobby de una liga en la que participa y esa liga ya está creada.
+**Precondición:**  Usuario está en el lobby de una liga en la que participa.
 
 **Caso de Éxito (Flujo Principal):**
 
