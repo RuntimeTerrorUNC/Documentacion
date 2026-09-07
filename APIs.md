@@ -175,7 +175,7 @@ Respuestas:
 
 - 403 Forbidden
 ```json
-{ "error": "String (Bloquea la acción e informa si el club quedaría con menos de 1 comportamiento registrado, o si el comportamiento se encuentra actualmente asignado a un jugador convocado o en partido activo)" }
+{ "error": "String (Bloquea la acción e informa si el club quedaría sin comportamientos, o si el comportamiento se encuentra actualmente asignado a un jugador en una convocatoria de liga o en un partido activo)" }
 ```
 
 - 404 Not Found
@@ -210,7 +210,7 @@ Respuestas:
 
 - 403 Forbidden
 ```json
-{ "error": "String (Bloquea la acción e informa que el club debe tener estrictamente más de 1 comportamiento registrado para poder modificarlo)" }
+{ "error": "String (Bloquea la acción si el comportamiento está asignado a un jugador en una convocatoria de liga o en un partido activo)" }
 ```
 
 - 404 Not Found
@@ -286,10 +286,10 @@ Respuestas:
 ]
 ```
 
-- 404 Not Found
 ```json
 { "error": "String (Informa que el usuario no tiene un club registrado o que aún no posee jugadores en su plantel)" }
 ```
+ 403 Forbidden
 
 CLUB
 
@@ -312,10 +312,10 @@ Respuestas:
 { "id_club": "Integer", "mensaje": "String (Confirma los datos ingresados y notifica que el club fue creado exitosamente)" }
 ```
 
-- 400 Bad Request
 ```json
 { "error": "String (Informa que las casillas están vacías, que el nombre posee caracteres inválidos, o que el avatar tiene un formato inválido, solicitando reingreso)" }
 ```
+ 400 Bad Request
 
 - 400 Bad Request
 ```json
@@ -502,6 +502,11 @@ Respuestas:
 - 404 Not Found
 ```json
 { "error": "String (Informa que no se encontró ninguna liga con ese nombre, o que el club solicitado no participa en ella)" }
+```
+
+- 403 Forbidden
+```json
+{ "error": "String (Bloquea la consulta cuando la liga es privada y el usuario autenticado no participa en ella)" }
 ```
 
 LIGAS
@@ -729,7 +734,7 @@ Respuestas:
 
 - 400 Bad Request
 ```json
-{ "error": "String (No cumple con los requisitos mínimos de convocatoria)" }
+{ "error": "String (No cumple con los requisitos mínimos de convocatoria, porque falta un jugador, la formación o un comportamiento requerido, o el jugador titular indicado no está disponible en cancha)" }
 ```
 
 - 400 Bad Request
@@ -854,6 +859,11 @@ Respuestas:
 - 200 OK
 ```json
 { "mensaje": "String (Confirma que el cambio fue registrado exitosamente y notifica que se ejecutará físicamente en la cancha cuando ocurra el evento de 'pausa de hidratación' o 'medio tiempo')" }
+```
+
+- 400 Bad Request
+```json
+{ "error": "String (Informa que el jugador entrante no está disponible o que el jugador titular indicado no está actualmente en cancha)" }
 ```
 
 - 403 Forbidden
