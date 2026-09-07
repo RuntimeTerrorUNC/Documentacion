@@ -295,30 +295,26 @@
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado; Tener Club; Tener por lo menos 1 comportamiento.
+**Precondición:** Tener por lo menos 1 comportamiento
 
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario solicita modificar un comportamiento.
 2. El sistema le pide que ingrese el nombre del comportamiento.
 3. El usuario ingresa el nombre del comportamiento.
-4. El sistema verifica que el comportamiento exista. Espera confirmación del usuario.
+4. El sistema verifica que el comportamiento exista.
 5. El usuario modifica el código y confirma la modificación.
-6. El sistema modifica permanentemente el comportamiento.
-
-**Casos Alternativos:** 
-
-2.a. Si el usuario tiene un solo comportamiento, se adelanta el flujo al paso 5, autocompletando el sistema los pasos anteriores con el único comportamiento disponible.
+6. El sistema valida y modifica el comportamiento, y le informa al usuario que sea realizo la modificacion.
 
 **Casos Excepcionales:**
 
 4.a. El comportamiento no existe -> El sistema indica que no existe ese comportamiento y le permite intentar ingresar el nombre nuevamente.
 
-5.a. La nueva sintaxis es inválida -> El sistema indica que hay errores de sintaxis y solicita corrección.
+5. La nueva sintaxis es inválida -> El sistema indica que hay errores de sintaxis y solicita corrección.
 
 6.a. El comportamiento que se quiere modificar esta siendo utilizado en un partido -> El sistema indica que no se puede modificar el comportamiento
 
-7.a. El comportamiento que se quiere modificar es utilizado en una convocatoria -> El sistema indica que no se puede modificar el comportamiento
+6.b. El comportamiento que se quiere modificar es utilizado en una convocatoria -> El sistema indica que no se puede modificar el comportamiento
 
 ---
 
@@ -396,7 +392,7 @@
 
 **Actor:** Usuario
 
-**Precondición:** Usuario autenticado, con club registrado y tener 6 jugadores disponibles.
+**Precondición:** Usuario con club registrado y tener 6 jugadores disponibles.
 
 **Caso de Éxito (Flujo Principal):**
 
@@ -436,7 +432,8 @@
 
 **Casos Alternativos:**
 
-3.a. El usuario rechaza la confirmación -> El sistema cierra el aviso sin hacer cambios.
+3. El usuario rechaza la confirmación 
+4. El sistema cierra el aviso sin hacer cambios.
 
 ---
 
@@ -448,18 +445,19 @@
 
 **Actor:** Usuario
 
-**Precondición:** Estar Autenticado; Tener Club; Haber creado la Liga y que no se haya iniciado.
+**Precondición:** Tener Club; Haber creado la Liga y que no se haya iniciado.
 
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario elige la opción de eliminar liga.
 2. El sistema le muestra un aviso para confirmar o rechazar.
 3. El usuario elige la opción confirmar.
-4. El Sistema elimina la liga y redirige al usuario a la página principal.
+4. El Sistema elimina la liga y redirige a los usuarios del lobby al menú de juego y le notifica que la liga ha sido disuelta
 
 **Casos Alternativos:** 
 
-3.a. El Usuario elige la opción rechazar -> El Sistema cierra el aviso sin hacer cambios.
+3. El Usuario elige la opción rechazar -> El Sistema cierra el aviso sin hacer cambios.
+4. El Sistema cierra el aviso sin hacer cambios
 
 ---
 
