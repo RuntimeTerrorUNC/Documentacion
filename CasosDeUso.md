@@ -398,19 +398,17 @@
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario selecciona una liga de la lista de ligas.
-2. El sistema verifica que no se exceda la capacidad de la liga y pide la contraseña (si existe) de la misma al usuario.
-3. El usuario ingresa la contraseña de la liga (si existe) y confirma la petición.
-4. El sistema verifica la contraseña y solicita una lista de convocados al usuario.
-5. El usuario selecciona sus jugadores titulares y suplentes y envía la lista del equipo.
-6. El sistema verifica la lista del equipo, actualiza la lista de clubes en la liga e ingresa al usuario y a sus jugadores.
+2. El sistema verifica que no se exceda la capacidad de la liga, le solicita la contraseña(opcional) y una lista de convocados al usuario
+3. El usuario selecciona sus jugadores titulares y suplentes y envía la lista del equipo.
+4. El sistema verifica la lista del equipo, actualiza la lista de clubes en la liga e ingresa al usuario y a sus jugadores.
 
 **Casos Excepcionales:**
 
-2.a. La capacidad de la liga está al máximo -> El sistema envía un mensaje al usuario indicando que la liga está completa.
+2.a La capacidad de la liga está al máximo -> El sistema envía un mensaje al usuario indicando que la liga está completa.
 
-4.a. Contraseña de liga incorrecta -> El sistema envía el mensaje ("CONTRASEÑA INCORRECTA. INTENTE NUEVAMENTE") al usuario.
+2.b La contraseña de liga es incorrecta -> El sistema envía el mensaje de contraseña rechazada al usuario.
 
-5.a. Usuario ingresó menos de 6 jugadores -> El sistema informa que necesita convocar a 6 jugadores (3 titulares con comportamientos y 3 suplentes).
+4.Usuario ingresó menos de 6 jugadores -> El sistema informa que necesita convocar a 6 jugadores (3 titulares con comportamientos y 3 suplentes).
 
 ---
 
