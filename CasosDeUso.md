@@ -160,8 +160,7 @@
 2. El sistema despliega un campo requiriendo el nuevo nombre.
 3. El usuario ingresa el nuevo nombre.
 4. El sistema valida que el texto cumpla con la longitud permitida, no contenga caracteres inválidos y garantice la unicidad global del nombre frente a otros clubes existentes.
-5. El sistema actualiza el nombre del club en la base de datos.
-6. El sistema notifica que el cambio se realizó correctamente.
+5. El sistema actualiza el nombre del club en la base de datos y notifica que el cambio se realizó correctamente.
 
 **Casos Excepcionales:**
 
