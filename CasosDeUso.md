@@ -134,8 +134,7 @@
 **Caso de Éxito (Flujo Principal):**
 
 1. Usuario ingresa un nombre y un avatar.
-2. El sistema valida los datos ingresados, registra el club y notifica al usuario que el club fue creado.
-3. El Usuario ingresa al menú del club.
+2. El sistema valida los datos ingresados, registra el club, notifica al usuario que el club fue creado y lo redirige al menu principal.
 
 **Casos Excepcionales:**
 
