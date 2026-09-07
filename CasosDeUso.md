@@ -55,10 +55,12 @@
 
 **Caso de éxito:**
 
-1. El usuario ingresa credenciales user y password.
-2. El sistema chequea las credenciales.
-3. El sistema permite el acceso.
-4. El sistema muestra la pantalla de inicio de su club.
+1. El usuario solicita autenticarse
+2. El sistema despliega un formulario con campos user y password
+3. El usuario ingresa credenciales user y password
+4. El sistema chequea las credenciales.
+5. El sistema permite el acceso.
+6. El sistema muestra la pantalla de inicio de su club.
 
 **Caso excepcional:**
 
