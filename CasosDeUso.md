@@ -702,15 +702,19 @@
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El usuario solicita listar los jugadores de otro club.
-2. El sistema solicita el nombre del club para listar los jugadores.
-3. El usuario ingresa el nombre del club.
-4. El sistema lista todos los jugadores de ese club con su respectivo nombre y skills.
+1. El usuario solicita listar los plantel de otro club en una liga especifica.
+2. El sistema solicita el nombre del club y liga para listar el platel.
+3. El usuario ingresa el nombre del club y una liga.
+4. El sistema verifica que exsita el club la liga y que ese club participe en la liga
+y luego lista los jugadores convocados que tiene ese club en esa liga.
 
 **Casos Excepcionales:**
 
-3.a. El nombre ingresado del club no existe -> El sistema informa que no hay ningún club con ese nombre.
+1.a. El nombre ingresado del club no existe -> El sistema informa que no hay ningún club con ese nombre.
 
+2.a. El nombre ingresado de la liga no existe -> El sistema informa que no hay ningúna liga con ese nombre.
+
+3.a. El club no participa en esa liga -> el sistema informa que ese club no juega esa liga
 ---
 
 ## Caso de Uso 28:
