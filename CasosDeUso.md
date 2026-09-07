@@ -316,6 +316,10 @@
 
 5.a. La nueva sintaxis es inválida -> El sistema indica que hay errores de sintaxis y solicita corrección.
 
+6.a. El comportamiento que se quiere modificar esta siendo utilizado en un partido -> El sistema indica que no se puede modificar el comportamiento
+
+7.a. El comportamiento que se quiere modificar es utilizado en una convocatoria -> El sistema indica que no se puede modificar el comportamiento
+
 ---
 
 ## Caso de Uso 12:
@@ -343,6 +347,10 @@
 4.a. El comportamiento no existe -> El sistema indica la falla en el paso 4 y espera que el usuario seleccione otro comportamiento.
 
 5.a. El comportamiento está asignado a un jugador convocado -> El sistema impide la eliminación e informa del conflicto.
+
+6.a. El comportamiento que se quiere modificar esta siendo utilizado en un partido -> El sistema indica que no se puede modificar el comportamiento
+
+7.a. El comportamiento que se quiere modificar es utilizado en una convocatoria -> El sistema indica que no se puede modificar el comportamiento
 
 ---
 
