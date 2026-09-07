@@ -542,7 +542,7 @@
 
 **Casos Excepcionales:**
 
-4.a. El Usuario no cuenta con los requisitos mínimos para armar la plantilla:
+2.a. El Usuario no cuenta con los requisitos mínimos para armar la plantilla:
 
    1. El sistema da aviso y cancela la acción.
 
