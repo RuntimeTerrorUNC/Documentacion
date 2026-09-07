@@ -523,20 +523,20 @@
 
 **Caso de Éxito (Flujo Principal):**
 
-1. El sistema notifica al Usuario la recepción de un desafío con temporizador de respuesta.
-2. El Usuario abre la notificación y selecciona "Aceptar Invitación".
-3. El sistema solicita al Usuario seleccionar 6 jugadores, formación táctica y comportamientos iniciales.
-4. El Usuario configura su alineación y confirma.
-5. El sistema valida la información e inicia el partido para ambos usuarios.
+
+1. El Usuario abre la notificación y selecciona "Aceptar Invitación".
+2. El sistema solicita al Usuario seleccionar 6 jugadores, formación táctica y comportamientos iniciales.
+3. El Usuario configura su alineación y confirma.
+4. El sistema valida la información e inicia el partido para ambos usuarios.
 
 **Casos Alternativos:** 
 
-2.a. El Usuario Rival declina la invitación:
+1.a. El Usuario Rival declina la invitación:
 
    1. El Usuario selecciona "Rechazar".
    2. El sistema notifica al Usuario Retador la declinación.
 
-2.b. El temporizador expira sin respuesta:
+1.b. El temporizador expira sin respuesta:
 
    1. El sistema detecta el vencimiento del tiempo límite, descarta la invitación y notifica al Usuario Retador.
 
@@ -544,7 +544,7 @@
 
 4.a. El Usuario no cuenta con los requisitos mínimos para armar la plantilla:
 
-   1. El sistema detecta que el Usuario no puede completar los 6 convocados o tácticas. Cancela la aceptación automáticamente y notifica al retador la falta de plantel.
+   1. El sistema da aviso y cancela la acción.
 
 ---
 
