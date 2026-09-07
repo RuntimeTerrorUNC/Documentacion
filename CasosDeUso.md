@@ -109,7 +109,7 @@
 **Caso de Éxito (Flujo Principal):**
 
 1. El usuario elige cerrar sesión.
-2. Se le muestra un mensaje con la opción de confirmar o cancelar.
+2. El sistema muestra un mensaje con la opción de confirmar o cancelar.
 3. El usuario elige la opción confirmar.
 4. El sistema redirige al usuario a la página de autenticación.
 
@@ -134,7 +134,7 @@
 **Caso de Éxito (Flujo Principal):**
 
 1. Usuario ingresa un nombre y un avatar.
-2. El sistema valida los datos ingresados y notifica que el club fue creado.
+2. El sistema valida los datos ingresados, registra el club y notifica al usuario que el club fue creado.
 3. El Usuario ingresa al menú del club.
 
 **Casos Excepcionales:**
