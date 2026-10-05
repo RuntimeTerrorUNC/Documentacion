@@ -14,7 +14,7 @@ Headers:
 Body:
 ```json
 {
-  "username": "String (Alfanumérico, no modificable a futuro)",
+  "username": "String (Entre 1 y 25 caracteres)",
   "password": "String (Mínimo 8 caracteres)",
   "email": "String (Único globalmente, no puede repetirse)"
 }
@@ -23,17 +23,22 @@ Body:
 Respuestas:
 - 201 Created
 ```json
-{ "mensaje": "String", "id_usuario": "Integer" }
+{
+  "id": 1,
+  "username": "entrenador",
+  "email": "entrenador@example.com",
+  "mensaje": "Usuario registrado exitosamente."
+}
 ```
 
 - 400 Bad Request
 ```json
-{ "error": "String (Descripción del campo faltante o formato inválido)" }
+{ "detail": "El nombre de usuario o correo electrónico ya está registrado." }
 ```
 
-- 409 Conflict
+- 422 Unprocessable Entity
 ```json
-{ "error": "String (Notifica que el username ya existe)" }
+{ "detail": "Errores de validación del body" }
 ```
 
 ## POST /api/auth/login
@@ -53,9 +58,13 @@ Respuestas:
 ```json
 {
   "token": "String (Token de sesión JWT para autorizar el comienzo del juego)",
-  "mensaje": "String (Confirmación de autenticación exitosa)"
+  "user_id": "Integer (Identificador del usuario)",
+  "mensaje": "String (Confirmación de autenticación exitosa)",
+  "tiene_club": "Integer o null (Identificador del club del usuario, si existe)"
 }
 ```
+
+El token vence a las 24 horas.
 
 - 400 Bad Request
 ```json
@@ -127,14 +136,20 @@ Respuestas:
 - 200 OK
 ```json
 {
-  "nombre": "String (Nombre del comportamiento consultado)",
-  "codigo_python": "String (Código fuente Python almacenado para el comportamiento)"
+  "id": "Integer",
+  "name": "String (Nombre del comportamiento consultado)",
+  "script": "String (Código fuente Python almacenado para el comportamiento)"
 }
+```
+
+- 403 Forbidden
+```json
+{ "detail": "El usuario autenticado no tiene un club." }
 ```
 
 - 404 Not Found
 ```json
-{ "error": "String (Informa de que no se encontró ningún comportamiento con ese nombre en el club)" }
+{ "detail": "Comportamiento no existe" }
 ```
 
 ## GET /api/comportamientos
@@ -147,18 +162,14 @@ Body:
 Respuestas:
 - 200 OK
 ```json
-[
-  {
-    "id_comportamiento": "Integer",
-    "nombre": "String (Nombre de cada comportamiento perteneciente al club del usuario)"
-  }
-]
+{
+  "comportamientos": [
+    { "id": 1, "nombre": "Presión Alta" }
+  ]
+}
 ```
 
-- 404 Not Found
-```json
-{ "error": "String (Informa que el club no posee ningún comportamiento creado hasta el momento)" }
-```
+Si no hay comportamientos, la lista `comportamientos` está vacía. Si el usuario no tiene club, responde `403 Forbidden` con `{"detail":"El usuario autenticado no tiene un club."}`.
 
 ## DELETE /api/comportamientos/{nombre_comportamiento}
 Headers:
@@ -228,37 +239,39 @@ Headers:
 Body:
 ```json
 {
-  "nombre": "String (Único dentro del plantel del club)",
-  "skills": {
-    "fuerza": "Integer (Valor numérico)",
-    "velocidad": "Integer (Valor numérico)",
-    "control": "Integer (Valor numérico)",
-    "poder": "Integer (Valor numérico)",
-    "agilidad": "Integer (Valor numérico)"
-  }
+  "name": "String (Entre 1 y 50 caracteres; único dentro del club)",
+  "speed": "Integer (Entre 20 y 100)",
+  "strength": "Integer (Entre 20 y 100)",
+  "power": "Integer (Entre 20 y 100)",
+  "agility": "Integer (Entre 20 y 100)",
+  "control": "Integer (Entre 20 y 100)"
 }
 ```
+
+La suma de las cinco estadísticas debe ser exactamente 300.
 
 Respuestas:
 - 201 Created
 ```json
-{ "mensaje": "String (Confirma la creación exitosa y el registro del nuevo jugador en el plantel)", "id_jugador": "Integer" }
+{ "id": 1, "name": "Delantero", "created": true }
 ```
 
 - 400 Bad Request
 ```json
-{ "error": "String (Notifica la diferencia de puntos si la suma de las skills es distinta a 300 exactos y solicita reajustar los valores)" }
+{ "detail": "Las estadísticas deben sumar 300; suman <total>." }
 ```
 
 - 403 Forbidden
 ```json
-{ "error": "String (Bloquea la acción informando que se alcanzó la capacidad máxima de 50 jugadores en la base de datos e invita a eliminar uno)" }
+{ "detail": "El usuario autenticado no tiene un club." }
 ```
 
 - 409 Conflict
 ```json
-{ "error": "String (Rechaza el registro notificando que el nombre ya existe en el club y solicita uno nuevo)" }
+{ "detail": "Ya existe un jugador con ese nombre en tu club." }
 ```
+
+Los errores de validación del body responden `422 Unprocessable Entity`.
 
 
 ## GET /api/jugadores
@@ -273,63 +286,53 @@ Respuestas:
 ```json
 [
   {
-    "id_jugador": "Integer",
-    "nombre": "String (Nombre del jugador)",
-    "skills": {
-      "fuerza": "Integer (Atributo de fuerza)",
-      "velocidad": "Integer (Atributo de velocidad)",
-      "control": "Integer (Atributo de control)",
-      "poder": "Integer (Atributo de poder)",
-      "agilidad": "Integer (Atributo de agilidad)"
-    }
+    "id": 1,
+    "name": "string",
+    "speed": "int",
+    "strength": "int",
+    "power": "int",
+    "agility": "int",
+    "control": "int",
+    "club_id": "int"
   }
 ]
 ```
 
 ```json
-{ "error": "String (Informa que el usuario no tiene un club registrado o que aún no posee jugadores en su plantel)" }
+{ "detail": "El usuario autenticado no tiene un club." }
 ```
- 403 Forbidden
+La respuesta es `403 Forbidden` si el usuario no tiene club. Si no hay jugadores, responde `200 OK` con `[]`.
 
 CLUB
 
 ## POST /api/clubes
 Headers:
-- Content-Type: application/json
+- Content-Type: multipart/form-data
 - Authorization: Bearer <token_jwt>
 
 Body:
-```json
-{
-  "nombre": "String (Nombre del club a crear)",
-  "avatar": "archivo.jpg"
-}
-```
+- `name`: texto obligatorio, entre 3 y 100 caracteres.
+- `photo`: archivo JPEG/JPG obligatorio, máximo 1 MB.
 
 Respuestas:
 - 201 Created
 ```json
-{ "id_club": "Integer", "mensaje": "String (Confirma los datos ingresados y notifica que el club fue creado exitosamente)" }
+{ "name": "Club Ejemplo", "photo": "static/uploads/<archivo>.jpg", "id": 3, "owner_id": 1 }
 ```
-
-```json
-{ "error": "String (Informa que las casillas están vacías, que el nombre posee caracteres inválidos, o que el avatar tiene un formato inválido, solicitando reingreso)" }
-```
- 400 Bad Request
 
 - 400 Bad Request
 ```json
-{ "error": "String (Informa que el archivo excede el tamaño máximo permitido o que la extensión debe ser .jpg)" }
+{ "detail": "La foto debe ser un archivo de imagen válido (JPG/JPEG) o el archivo supera el límite de 1 MB." }
 ```
 
 - 403 Forbidden
 ```json
-{ "error": "String (Bloquea la creación informando que el usuario autenticado ya posee un club asociado)" }
+{ "detail": "El usuario ya posee un club registrado. Solo se permite un club por usuario." }
 ```
 
 - 409 Conflict
 ```json
-{ "error": "String (Informa que el nombre del club ingresado ya está registrado en el sistema y solicita ingresar uno diferente)" }
+{ "detail": "El nombre de club ya está en uso." }
 ```
 
 ## PUT /api/clubes/mi-club/nombre
@@ -395,22 +398,15 @@ Respuestas:
 ```json
 [
   {
-    "id_club": "Integer",
-    "nombre": "String (Nombre del club)",
-    "logo": "Archivo.jpg"
+    "name": "Club Ejemplo",
+    "photo": "static/uploads/<archivo>.jpg",
+    "id": 3,
+    "owner_id": 1
   }
 ]
 ```
 
-- 403 Forbidden
-```json
-{ "error": "String (Bloquea la acción informando que el usuario autenticado no cumple con la precondición de tener un club propio registrado en el sistema para poder ver el listado)" }
-```
-
-- 404 Not Found
-```json
-{ "error": "String (Informa que por algún motivo excepcional no se encontró ningún club registrado en la base de datos para listar)" }
-```
+La respuesta puede ser `[]` si no hay clubes ajenos para listar. Se puede enviar `?nombre=<texto>` para filtrar, aunque actualmente el filtro falla porque consulta un atributo `Club.nombre` que no existe en el modelo (el atributo se llama `name`).
 
 ## GET /api/clubes/{nombre_club}/jugadores
 Headers:
@@ -511,7 +507,7 @@ Respuestas:
 
 LIGAS
 
-## POST /api/ligas
+## POST /api/ligas/
 Headers:
 - Content-Type: application/json
 - Authorization: Bearer <token_jwt>
@@ -519,43 +515,46 @@ Headers:
 Body:
 ```json
 {
-  "nombre": "String (Único globalmente, no puede estar registrado por otra liga activa)",
-  "contrasena": "String (Opcional, si no se envía la liga será de acceso público)",
-  "duracion_partido": "Integer (Minutos de duración, debe estar dentro de los parámetros permitidos)",
-  "cantidad_equipos": "Integer (Tope máximo de clubes que podrán unirse a la sala)",
+  "name": "String (Entre 1 y 25 caracteres; único globalmente)",
+  "password": "String o null (Opcional; si se informa, entre 6 y 50 caracteres)",
+  "duracion_partido": "Integer (Mayor que 0)",
+  "cantidad_equipos": "Integer (Entre 4 y 50)",
   "jugadores_convocados": [
     {
       "id_jugador": "Integer",
       "rol": "String (Debe indicarse 'titular' o 'suplente')",
-      "comportamiento": "String (Debe indicarse el nombre del comportamiento necesariamente para jugar partidos)"
+      "comportamiento": "String o null (Obligatorio para titulares; no permitido para suplentes)"
     }
   ],
-  "formacion_tactica": "Integer (Código numérico de la formación táctica predefinida por el sistema)"
+  "formacion_tactica": "Integer (Mayor o igual que 1)"
 }
 ```
 
-Nota: al crear una liga también se está uniendo como participante.
+Debe incluir exactamente seis jugadores distintos del club del usuario. Se requieren tres titulares con comportamiento asignado; los suplentes no deben tenerlo. Una liga con contraseña no vacía es privada; sin contraseña es pública. El club creador se registra en la convocatoria al crear la liga.
 
 Respuestas:
 - 201 Created
 ```json
-{ "mensaje": "String (Confirma que los datos son correctos, que la sala fue creada y el sistema queda a la espera de clubes)", "id_liga": "Integer" }
+{ "id_liga": 1, "owner_id": 3 }
 ```
+`owner_id` contiene el identificador del club creador.
 
 - 400 Bad Request
 ```json
-{ "error": "String (Informa exactamente qué dato está mal ingresado: casillas vacías, contraseña inválida, duración de partido fuera de rango o cantidad de equipos mal definida, y solicita reingreso)" }
+{ "detail": "La convocatoria no es válida o el usuario no tiene un club asociado." }
 ```
 
-- 403 Forbidden
+- 401 Unauthorized
 ```json
-{ "error": "String (Bloquea la acción si el usuario autenticado intenta crear la liga sin tener previamente un club registrado)" }
+{ "detail": "Token ausente, inválido o vencido." }
 ```
 
 - 409 Conflict
 ```json
-{ "error": "String (Informa que el nombre de la liga ingresado ya se encuentra registrado en el sistema y solicita uno diferente)" }
+{ "detail": "El nombre de la liga ya está en uso" }
 ```
+
+Los errores de validación del body responden `422 Unprocessable Entity`.
 
 ## DELETE /api/ligas/{id_liga}
 Headers:
@@ -680,7 +679,7 @@ Respuestas:
     "partidos_perdidos": "Integer",
     "partidos_empatados": "Integer",
     "goles_a_favor": "Integer",
-- Vacío. La advertencia visual informando que perderá su lugar y la posterior decisión de confirmar o rechazar ocurren estrictamente en la interfaz del Frontend; la petición a la API se dispara únicamente cuando el usuario elige la opción "confirmar".
+  }]
 
 Respuestas:
 - 200 OK
@@ -726,6 +725,8 @@ Body:
 
 Nota: el array debe contener exactamente 6 jugadores requeridos (3 titulares y 3 suplentes) para superar la validación.
 
+La implementación exige que los seis jugadores pertenezcan al club retador y que cada uno tenga un comportamiento existente asignado. El club rival debe tener al menos seis jugadores. La solicitud vence a los cinco minutos.
+
 Respuestas:
 - 200 OK
 ```json
@@ -734,18 +735,20 @@ Respuestas:
 
 - 400 Bad Request
 ```json
-{ "error": "String (No cumple con los requisitos mínimos de convocatoria, porque falta un jugador, la formación o un comportamiento requerido, o el jugador titular indicado no está disponible en cancha)" }
+{ "detail": { "error": "No cumple con los requisitos mínimos de convocatoria o se enviaron jugadores duplicados." } }
 ```
 
 - 400 Bad Request
 ```json
-{ "error": "String (El club rival no cumple con los requisitos mínimos de convocatoria)" }
+{ "detail": "El club rival no cumple con los requisitos mínimos de convocatoria" }
 ```
 
 - 404 Not Found
 ```json
-{ "error": "String (Informa que el club rival seleccionado ya no existe o no fue encontrado en la base de datos)" }
+{ "detail": { "error": "El club rival seleccionado ya no existe o no fue encontrado en la base de datos" } }
 ```
+
+Si el usuario no tiene club, responde `400 Bad Request`; los errores de autenticación responden `401 Unauthorized`. FastAPI envuelve el detalle de las excepciones en la propiedad `detail`.
 
 ## POST /api/amistosos/solicitudes/{id_solicitud}/aceptar
 Headers:
@@ -954,7 +957,25 @@ Respuestas:
 { "error": "String (Bloquea el cambio informando que hay un partido de esta liga en curso en este momento; debe esperar a que finalice para actualizar el plantel)" }
 ```
 
-## WebSocket de partido en vivo
+## WebSocket de notificaciones de amistosos (implementado)
+
+**Endpoint:** `ws://<host>/ws/{user_id}?token=<token_jwt>`
+
+El `user_id` debe coincidir con el usuario incluido en el JWT. Si el token no es válido o no corresponde al usuario de la ruta, el servidor cierra la conexión con el código `1008`. Al llegar una solicitud de amistoso, el usuario rival conectado recibe un mensaje JSON como el siguiente:
+
+```json
+{
+  "tipo": "NUEVA_SOLICITUD_AMISTOSO",
+  "id_solicitud": 1,
+  "id_club_retador": 3,
+  "expira_en_segundos": 300,
+  "mensaje": "El club 3 te ha enviado un desafío amistoso."
+}
+```
+
+El cliente debe mantener la conexión abierta; los mensajes de texto que envía se reciben para mantener el socket activo, pero no ejecutan operaciones.
+
+## WebSocket de partido en vivo (pendiente de implementación)
 
 ### Explicación rápida: por qué se separa en tres tipos
 
@@ -966,7 +987,7 @@ En un WebSocket de partido en vivo no conviene mandar un solo tipo de mensaje gi
 
 Esto evita mandar información redundante todo el tiempo (por ejemplo, no tiene sentido reenviar los límites de la cancha 10 veces por segundo si nunca cambian) y separa claramente "esto es un dato que se actualiza" de "esto es un hecho que ocurrió".
 
-**Endpoint:** `websocket/partidos/{id_partido}`  
+**Endpoint propuesto:** `websocket/partidos/{id_partido}`  
 **Fin de partido:**
 
 ```json
